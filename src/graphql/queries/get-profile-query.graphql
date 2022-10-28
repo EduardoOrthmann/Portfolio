@@ -1,0 +1,10 @@
+query GetProfile {
+  profile(where: { id: "cl9rn6xb61ug80alr79nhb6y0" }) {
+    id
+    description
+    name
+    imageUrl {
+      url
+    }
+  }
+}

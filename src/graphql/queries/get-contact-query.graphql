@@ -1,0 +1,9 @@
+query GetContact {
+  contact(where: { id: "cl9rn1bbn1u9n0alr5du3rktt" }) {
+    id
+    email
+    phoneNumber
+    linkedin
+    github
+  }
+}

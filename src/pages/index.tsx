@@ -1,6 +1,10 @@
 import Head from 'next/head';
+// eslint-disable-next-line import/extensions
+import { useGetProfileQuery } from '../graphql/generated';
 
 export default function Home() {
+  const { data } = useGetProfileQuery();
+
   return (
     <div>
       <Head>
@@ -9,7 +13,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main></main>
+      <main>{data?.profile?.name}</main>
     </div>
   );
 }
