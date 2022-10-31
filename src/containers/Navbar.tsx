@@ -1,7 +1,9 @@
+import styles from '../styles/Navbar.module.scss';
+
 function Navbar() {
   return (
-    <nav className="w-full px-8 py-4 fixed backdrop-blur-sm border border-solid border-[#ffffff2E] bg-[#ffffff40]">
-      <ul className="uppercase flex justify-center items-center gap-4 text-gray-color font-medium text-sm">
+    <nav>
+      <ul>
         <li>
           <a href="#home">Home</a>
         </li>
