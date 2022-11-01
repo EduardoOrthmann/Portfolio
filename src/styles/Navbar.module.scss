@@ -1,0 +1,62 @@
+.navbar {
+  width: 100%;
+  position: fixed;
+  padding: 1rem 2rem;
+
+  background: rgba(255, 255, 255, 0.251);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  gap: 1rem;
+
+  li {
+    &:hover {
+      span {
+        background: var(--secondary-color);
+      }
+    }
+
+    ::before {
+      content: ' \25CF';
+      font-size: 0.8rem;
+
+      color: transparent;
+      transition: all 0.3s ease-in-out;
+    }
+
+    a {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      font-weight: 500;
+      text-transform: uppercase;
+
+      color: var(--gray-color);
+      transition: all 0.3s ease-in-out;
+
+      &:hover,
+      &:hover::before {
+        color: var(--secondary-color);
+      }
+    }
+  }
+
+  @media screen and (max-width: 900px) {
+    display: none;
+  }
+}
+
+.menu {
+  @media screen and (min-width: 900px) {
+    display: none;
+  }
+}
