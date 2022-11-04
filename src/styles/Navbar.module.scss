@@ -1,12 +1,15 @@
 .navbar {
   width: 100%;
   position: fixed;
-  padding: 1rem 2rem;
 
   background: rgba(255, 255, 255, 0.251);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
   border: 1px solid rgba(255, 255, 255, 0.18);
+
+  ul {
+    padding: 1rem 2rem;
+  }
 }
 
 .links {
@@ -56,6 +59,53 @@
 }
 
 .menu {
+  padding: 1rem 2rem;
+
+  svg:hover {
+    background-color: var(--secondary-color);
+    color: white;
+  }
+
+  &:has(div) {
+    & > svg {
+      display: none;
+    }
+
+    & {
+      padding: 0;
+    }
+
+    div svg {
+      background-color: var(--primary-color);
+      color: #000;
+    }
+  }
+
+  aside {
+    width: 18.75rem;
+    height: 100vh;
+    padding: 1rem 2rem;
+
+    background: var(--white-color) url('../assets/bgIMG.png') repeat;
+    background-size: cover;
+
+    box-shadow: 0px 0px 20px rgba(168, 168, 168, 0.15);
+  }
+
+  svg {
+    padding: 5px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    background-color: var(--secondary-color);
+    color: white;
+  }
+
+  ul li {
+    padding: 1rem 0;
+  }
+
   @media screen and (min-width: 900px) {
     display: none;
   }

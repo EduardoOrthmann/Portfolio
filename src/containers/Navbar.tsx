@@ -1,46 +1,93 @@
 import { List, X } from 'phosphor-react';
 import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import styles from '../styles/Navbar.module.scss';
 
 function Navbar() {
-  const [toggleNavbar, setToggleNavbar] = useState(false);
+  const [toggleNavbar, setToggleNavbar] = useState<boolean>(false);
 
-  const list = {
-    id: ['home', 'about', 'projects', 'skills', 'contact'],
-    displayName: ['Home', 'Sobre', 'Projetos', 'Habilidades', 'Contato'],
+  const links = [
+    { name: 'Home', to: '#home', id: 1 },
+    { name: 'Sobre', to: '#about', id: 2 },
+    { name: 'Projetos', to: '#projects', id: 3 },
+    { name: 'Habilidades', to: '#skills', id: 4 },
+    { name: 'Contato', to: '#contact', id: 5 },
+  ];
+
+  const itemVariants = {
+    closed: { opacity: 0 },
+    open: { opacity: 1 },
+  };
+
+  const sideVariants = {
+    closed: {
+      transition: {
+        staggerChildren: 0.1,
+        staggerDirection: -1,
+      },
+    },
+    open: {
+      transition: {
+        staggerChildren: 0.2,
+        staggerDirection: 1,
+      },
+    },
   };
 
   return (
     <nav className={styles.navbar}>
       <ul className={styles.links}>
-        {list.id.map((id, i) => (
+        {links.map(({ name, to, id }) => (
           <li key={id}>
-            <a href={`#${id}`}>{list.displayName[i]}</a>
+            <a href={to}>{name}</a>
           </li>
         ))}
       </ul>
 
       <div className={styles.menu}>
-        <List size={32} onClick={() => setToggleNavbar(true)} />
+        <List size={34} onClick={() => setToggleNavbar(true)} />
 
-        {toggleNavbar && (
-          <motion.div
-            whileInView={{ x: [300, 0] }}
-            transition={{ duration: 0.85, ease: 'easeOut' }}
-          >
-            <X size={32} onClick={() => setToggleNavbar(false)} />
-            <ul>
-              {list.id.map((id, i) => (
-                <li key={id}>
-                  <a href={`#${id}`} onClick={() => setToggleNavbar(false)}>
-                    {list.displayName[i]}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-        )}
+        <AnimatePresence>
+          {toggleNavbar && (
+            <motion.aside
+              initial={{ width: 0 }}
+              animate={{
+                width: 300,
+              }}
+              exit={{
+                width: 0,
+                transition: { delay: 0.5, duration: 0.3 },
+              }}
+            >
+              <motion.div
+                initial="closed"
+                animate="open"
+                exit="closed"
+                variants={sideVariants}
+              >
+                <X size={34} onClick={() => setToggleNavbar(false)} />
+                <ul>
+                  {links.map(({ name, to, id }) => (
+                    <li key={id}>
+                      <motion.div
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.9 }}
+                      >
+                        <motion.a
+                          href={to}
+                          onClick={() => setToggleNavbar(false)}
+                          variants={itemVariants}
+                        >
+                          {name}
+                        </motion.a>
+                      </motion.div>
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+            </motion.aside>
+          )}
+        </AnimatePresence>
       </div>
     </nav>
   );
