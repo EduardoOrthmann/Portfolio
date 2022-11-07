@@ -2512,6 +2512,7 @@ export type Profile = Node & {
   description: Scalars['String'];
   /** Get the document in other stages */
   documentInStages: Array<Profile>;
+  headline: Array<Scalars['String']>;
   /** List of Profile versions */
   history: Array<Version>;
   /** The unique identifier */
@@ -2596,6 +2597,7 @@ export type ProfileConnection = {
 export type ProfileCreateInput = {
   createdAt?: InputMaybe<Scalars['DateTime']>;
   description: Scalars['String'];
+  headline: Array<Scalars['String']>;
   imageUrl: AssetCreateOneInlineInput;
   name: Scalars['String'];
   updatedAt?: InputMaybe<Scalars['DateTime']>;
@@ -2672,6 +2674,16 @@ export type ProfileManyWhereInput = {
   documentInStages_every?: InputMaybe<ProfileWhereStageInput>;
   documentInStages_none?: InputMaybe<ProfileWhereStageInput>;
   documentInStages_some?: InputMaybe<ProfileWhereStageInput>;
+  /** Matches if the field array contains *all* items provided to the filter and order does match */
+  headline?: InputMaybe<Array<Scalars['String']>>;
+  /** Matches if the field array contains *all* items provided to the filter */
+  headline_contains_all?: InputMaybe<Array<Scalars['String']>>;
+  /** Matches if the field array does not contain any of the items provided to the filter */
+  headline_contains_none?: InputMaybe<Array<Scalars['String']>>;
+  /** Matches if the field array contains at least one item provided to the filter */
+  headline_contains_some?: InputMaybe<Array<Scalars['String']>>;
+  /** Matches if the field array does not contains *all* items provided to the filter or order does not match */
+  headline_not?: InputMaybe<Array<Scalars['String']>>;
   id?: InputMaybe<Scalars['ID']>;
   /** All values containing the given string. */
   id_contains?: InputMaybe<Scalars['ID']>;
@@ -2753,6 +2765,8 @@ export enum ProfileOrderByInput {
   CreatedAtDesc = 'createdAt_DESC',
   DescriptionAsc = 'description_ASC',
   DescriptionDesc = 'description_DESC',
+  HeadlineAsc = 'headline_ASC',
+  HeadlineDesc = 'headline_DESC',
   IdAsc = 'id_ASC',
   IdDesc = 'id_DESC',
   NameAsc = 'name_ASC',
@@ -2765,6 +2779,7 @@ export enum ProfileOrderByInput {
 
 export type ProfileUpdateInput = {
   description?: InputMaybe<Scalars['String']>;
+  headline?: InputMaybe<Array<Scalars['String']>>;
   imageUrl?: InputMaybe<AssetUpdateOneInlineInput>;
   name?: InputMaybe<Scalars['String']>;
 };
@@ -2788,6 +2803,7 @@ export type ProfileUpdateManyInlineInput = {
 
 export type ProfileUpdateManyInput = {
   description?: InputMaybe<Scalars['String']>;
+  headline?: InputMaybe<Array<Scalars['String']>>;
   name?: InputMaybe<Scalars['String']>;
 };
 
@@ -2888,6 +2904,16 @@ export type ProfileWhereInput = {
   documentInStages_every?: InputMaybe<ProfileWhereStageInput>;
   documentInStages_none?: InputMaybe<ProfileWhereStageInput>;
   documentInStages_some?: InputMaybe<ProfileWhereStageInput>;
+  /** Matches if the field array contains *all* items provided to the filter and order does match */
+  headline?: InputMaybe<Array<Scalars['String']>>;
+  /** Matches if the field array contains *all* items provided to the filter */
+  headline_contains_all?: InputMaybe<Array<Scalars['String']>>;
+  /** Matches if the field array does not contain any of the items provided to the filter */
+  headline_contains_none?: InputMaybe<Array<Scalars['String']>>;
+  /** Matches if the field array contains at least one item provided to the filter */
+  headline_contains_some?: InputMaybe<Array<Scalars['String']>>;
+  /** Matches if the field array does not contains *all* items provided to the filter or order does not match */
+  headline_not?: InputMaybe<Array<Scalars['String']>>;
   id?: InputMaybe<Scalars['ID']>;
   /** All values containing the given string. */
   id_contains?: InputMaybe<Scalars['ID']>;
@@ -6558,7 +6584,7 @@ export type GetContactQuery = { __typename?: 'Query', contact?: { __typename?: '
 export type GetProfileQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetProfileQuery = { __typename?: 'Query', profile?: { __typename?: 'Profile', id: string, description: string, name: string, imageUrl: { __typename?: 'Asset', url: string } } | null };
+export type GetProfileQuery = { __typename?: 'Query', profile?: { __typename?: 'Profile', id: string, description: string, name: string, headline: Array<string>, imageUrl: { __typename?: 'Asset', url: string } } | null };
 
 export type GetProjectsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -6620,6 +6646,7 @@ export const GetProfileDocument = gql`
     id
     description
     name
+    headline
     imageUrl {
       url
     }

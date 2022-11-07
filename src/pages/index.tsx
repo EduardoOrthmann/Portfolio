@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import About from '../containers/About';
 import Contact from '../containers/Contact';
-import Header from '../containers/Header';
+import HomePage from '../containers/HomePage';
 import Navbar from '../containers/Navbar';
 import Projects from '../containers/Projects';
 import Skills from '../containers/Skills';
@@ -17,7 +17,7 @@ export default function Home() {
 
       <main>
         <Navbar />
-        <Header />
+        <HomePage />
         <About />
         <Projects />
         <Skills />

@@ -3,6 +3,7 @@ query GetProfile {
     id
     description
     name
+    headline
     imageUrl {
       url
     }

@@ -1,0 +1,44 @@
+.home {
+  height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  flex-wrap: wrap;
+
+  padding: 5rem;
+}
+
+.titles {
+  font-size: 2em;
+  max-width: 37.5rem;
+
+  h5 {
+    color: #6e6d70;
+    font-weight: lighter;
+  }
+
+  p {
+    font-size: 0.6em;
+  }
+}
+
+.imageBg {
+  background: rgb(134, 34, 195);
+  background: linear-gradient(
+    0deg,
+    rgba(134, 34, 195, 1) 0%,
+    var(--secondary-color) 100%
+  );
+  background-color: var(--secondary-color);
+  border-radius: 55% 45% 57% 43% / 33% 20% 80% 67%;
+
+  overflow: hidden;
+
+  img {
+    position: relative;
+    top: 10px;
+    right: 20px;
+  }
+}
