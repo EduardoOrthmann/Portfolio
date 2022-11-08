@@ -1,4 +1,6 @@
 import Image from 'next/image';
+import { PaperPlaneRight } from 'phosphor-react';
+import Button from '../components/Button';
 import { useGetProfileQuery } from '../graphql/generated';
 import styles from '../styles/HomePage.module.scss';
 
@@ -18,7 +20,7 @@ function HomePage() {
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias et
           sapiente odio nam nesciunt?
         </p>
-        <button>Contact me</button>
+        <Button icon={<PaperPlaneRight size={24} />}>Me Contate</Button>
       </div>
       <div>
         <div className={styles.imageBg}>

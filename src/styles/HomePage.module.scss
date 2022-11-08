@@ -4,15 +4,19 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 3rem;
+  gap: 2rem;
   flex-wrap: wrap;
 
   padding: 5rem;
 }
 
 .titles {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
   font-size: 2em;
-  max-width: 37.5rem;
+  max-width: 31.25rem;
 
   h5 {
     color: #6e6d70;
@@ -21,14 +25,20 @@
 
   p {
     font-size: 0.6em;
+    margin-bottom: 2.5rem;
+  }
+
+  button {
+    max-width: 200px;
+    padding: 1.3rem 1rem;
   }
 }
 
 .imageBg {
-  background: rgb(134, 34, 195);
+  background: var(--tertiary-color);
   background: linear-gradient(
     0deg,
-    rgba(134, 34, 195, 1) 0%,
+    var(--tertiary-color) 0%,
     var(--secondary-color) 100%
   );
   background-color: var(--secondary-color);
