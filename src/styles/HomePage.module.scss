@@ -1,15 +1,16 @@
 .home {
   height: 100vh;
-
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 2rem;
 
   padding: 3rem;
+  background: var(--white-color) url('../assets/bgIMG.png') repeat;
+    background-size: cover;
 
   @media screen and (max-width: 900px) {
-    flex-direction: column;
+    flex-direction: column-reverse;
   }
 }
 
@@ -47,6 +48,7 @@
   background-color: var(--secondary-color);
   border-radius: 55% 45% 57% 43% / 33% 20% 80% 67%;
 
+  box-shadow: 0px 0px 20px rgba(168, 168, 168, 0.75);
   overflow: hidden;
 
   img {
