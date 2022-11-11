@@ -1,0 +1,43 @@
+.container {
+  background-color: var(--primary-color);
+
+  padding: 2rem;
+  display: grid;
+  gap: 4rem;
+}
+
+.headText {
+  font-size: 2.75rem;
+  font-weight: 800;
+  text-align: center;
+  color: var(--black-color);
+  text-transform: capitalize;
+
+  span {
+    color: var(--secondary-color);
+  }
+
+  @media screen and (min-width: 2000px) {
+    font-size: 4rem;
+  }
+
+  @media screen and (max-width: 450px) {
+    font-size: 2rem;
+  }
+}
+
+.searchList {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+
+  button {
+    width: 100px;
+    height: 40px;
+
+    box-shadow: 0px 0px 5px rgba(168, 168, 168, 0.50);
+    font-size: 0.9em;
+    font-weight: bold;
+  }
+}

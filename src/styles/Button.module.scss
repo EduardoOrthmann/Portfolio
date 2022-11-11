@@ -28,5 +28,10 @@
 
 .secondary {
   color: #000;
-  background: linear-gradient(#c7c7d2, #bcbaba);
+  background: #fff
+}
+
+.purple {
+  color: #fff;
+  background: var(--secondary-color);
 }

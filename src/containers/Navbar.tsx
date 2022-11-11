@@ -8,10 +8,9 @@ function Navbar() {
 
   const links = [
     { name: 'Home', to: '#home', id: 1 },
-    { name: 'Sobre', to: '#about', id: 2 },
-    { name: 'Projetos', to: '#projects', id: 3 },
-    { name: 'Habilidades', to: '#skills', id: 4 },
-    { name: 'Contato', to: '#contact', id: 5 },
+    { name: 'Projetos', to: '#projects', id: 2 },
+    { name: 'Habilidades', to: '#skills', id: 3 },
+    { name: 'Contato', to: '#contact', id: 4 },
   ];
 
   const itemVariants = {

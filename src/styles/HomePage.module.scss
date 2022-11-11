@@ -7,7 +7,21 @@
 
   padding: 3rem;
   background: var(--white-color) url('../assets/bgIMG.png') repeat;
-    background-size: cover;
+  background-size: cover;
+  mask-image: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0),
+    rgba(0, 0, 0, 1) 10%,
+    rgba(0, 0, 0, 1)
+  );
+  -webkit-mask-image: -webkit-gradient(
+    linear,
+    center bottom,
+    center top,
+    color-stop(0, rgba(0, 0, 0, 0)),
+    color-stop(0.1, rgba(0, 0, 0, 1)),
+    color-stop(1, rgba(0, 0, 0, 1))
+  );
 
   @media screen and (max-width: 900px) {
     flex-direction: column-reverse;

@@ -22,26 +22,26 @@ function HomePage() {
           Oi, eu sou {data.profile.name}
         </motion.h1>
         <h5>{data.profile.headline}</h5>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias et
-          sapiente odio nam nesciunt?
-        </p>
+        <p>{data.profile.description}</p>
         <Button icon={<PaperPlaneRight size={24} />}>Me Contate</Button>
       </motion.div>
-      <div>
-        <motion.div
-          className={styles.imageBg}
-          animate={{ y: [null, -20, 0] }}
-          transition={{ type: 'spring', repeat: Infinity, mass: 0.1, duration: 4 }}
-        >
-          <Image
-            src={data.profile.imageUrl.url}
-            width={400}
-            height={400}
-            alt="foto de perfil"
-          />
-        </motion.div>
-      </div>
+      <motion.div
+        className={styles.imageBg}
+        animate={{ y: [null, -20, 0] }}
+        transition={{
+          type: 'spring',
+          repeat: Infinity,
+          mass: 0.1,
+          duration: 4,
+        }}
+      >
+        <Image
+          src={data.profile.imageUrl.url}
+          width={400}
+          height={400}
+          alt="foto de perfil"
+        />
+      </motion.div>
     </section>
   );
 }
