@@ -1,15 +1,16 @@
 .container {
-  background-color: var(--primary-color);
-
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding: 2rem;
-  display: grid;
   gap: 4rem;
+
+  background-color: var(--primary-color);
 }
 
 .headText {
   font-size: 2.75rem;
   font-weight: 800;
-  text-align: center;
   color: var(--black-color);
   text-transform: capitalize;
 
@@ -28,16 +29,30 @@
 
 .searchList {
   display: flex;
-  align-items: center;
-  justify-content: center;
   gap: 1rem;
 
   button {
     width: 100px;
     height: 40px;
 
-    box-shadow: 0px 0px 5px rgba(168, 168, 168, 0.50);
+    box-shadow: 0px 0px 5px rgba(168, 168, 168, 0.5);
     font-size: 0.9em;
     font-weight: bold;
+  }
+}
+
+.projects {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 3rem;
+
+  div {
+    max-width: 23rem;
+    height: 30rem;
+
+    @media screen and (min-width: 2000px) {
+      width: 29.375rem;
+    }
   }
 }
