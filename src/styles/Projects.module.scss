@@ -48,11 +48,6 @@
   flex-wrap: wrap;
   gap: 3rem;
 
-  & .content {
-    display: grid;
-    gap: 0.5rem;
-  }
-
   & > div {
     flex: 1;
     max-width: 23rem;
@@ -65,5 +60,34 @@
 
   p {
     color: var(--gray-color);
+  }
+
+  .content {
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .image {
+    display: grid;
+
+    div {
+      grid-column: 1/4;
+      grid-row: 1/3;
+    }
+
+    img {
+      grid-column: 1/4;
+      grid-row: 1/3;
+    }
+
+    span {
+      grid-column: 2/3;
+      grid-row: 2;
+      padding: 0.3rem 0.5rem;
+      border-radius: 0.5rem 0.5rem 0 0;
+
+      background-color: white;
+      color: var(--gray-color);
+    }
   }
 }
