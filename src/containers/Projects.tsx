@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Button from '../components/Button';
 import Card from '../components/Card';
 import { useGetProjectsQuery } from '../graphql/generated';
@@ -12,7 +13,7 @@ function Projects() {
 
   return (
     <section id="projects" className={styles.container}>
-      <h1 className={styles.headText}>Meus Projetos</h1>
+      <h1 className={styles.headText}>Meus <span>Projetos</span></h1>
       <ul className={styles.searchList}>
         {['UI/UX', 'ReactJS', 'Typescript', 'All'].map((name, i) => (
           <li key={i}>
@@ -23,25 +24,26 @@ function Projects() {
       <div className={styles.projects}>
         {data.projects.map((project) => (
           <Card key={project.id}>
-            <span>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque
-              voluptates dicta beatae fugit facere consequatur, obcaecati
-              possimus reiciendis doloribus minus quam quasi quae unde a
-              distinctio non tempora? Incidunt, cum. Lorem ipsum dolor, sit amet
-              consectetur adipisicing elit. Itaque omnis pariatur accusamus!
-              Voluptate explicabo nisi aliquid. Repellat dolorem dignissimos
-              earum. Animi id amet dolorem error, blanditiis totam numquam
-              molestiae? Molestiae sapiente praesentium quos eligendi nam
-              deleniti debitis laudantium accusamus assumenda quod culpa
-              exercitationem, quibusdam dolorum provident dignissimos eaque
-              labore maxime ipsum cupiditate nostrum dolor aperiam rerum. Error
-              dolorem sit iste consequuntur deleniti. Aspernatur magni nemo
-              inventore, explicabo est recusandae expedita!
-              {project.title}
-            </span>
+            <Card.Image>
+              {project.imageUrl.map((img, i) => (
+                <Image
+                  key={`${project.id}_${i}`}
+                  src={img.url}
+                  width={550}
+                  height={300}
+                  alt="foto do projeto"
+                />
+              ))}
+            </Card.Image>
+            <Card.Content>
+              <div className={styles.content}>
+                <h1>{project.title}</h1>
+                <p>{project.description}</p>
+              </div>
+            </Card.Content>
           </Card>
         ))}
-        <Card>
+        {/* <Card>
           <span>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae quas
             nemo quasi numquam, expedita ad reiciendis, iure, dolor explicabo
@@ -136,7 +138,7 @@ function Projects() {
             veniam praesentium modi dignissimos, tenetur id veritatis recusandae
             voluptatem blanditiis!
           </span>
-        </Card>
+        </Card> */}
       </div>
     </section>
   );

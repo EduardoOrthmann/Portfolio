@@ -29,6 +29,7 @@
 
 .searchList {
   display: flex;
+  flex-wrap: wrap;
   gap: 1rem;
 
   button {
@@ -47,12 +48,22 @@
   flex-wrap: wrap;
   gap: 3rem;
 
-  div {
+  & .content {
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  & > div {
+    flex: 1;
     max-width: 23rem;
-    height: 30rem;
+    min-width: 21.875rem;
 
     @media screen and (min-width: 2000px) {
       width: 29.375rem;
     }
+  }
+
+  p {
+    color: var(--gray-color);
   }
 }
