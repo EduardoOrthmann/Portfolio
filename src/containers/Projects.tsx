@@ -1,4 +1,6 @@
+import { motion } from 'framer-motion';
 import Image from 'next/image';
+import { Code, Eye } from 'phosphor-react';
 import Button from '../components/Button';
 import Card from '../components/Card';
 import { useGetProjectsQuery } from '../graphql/generated';
@@ -28,6 +30,38 @@ function Projects() {
           <Card key={project.id}>
             <Card.Image>
               <div className={styles.image}>
+                <motion.div
+                  className={styles.imageOverlay}
+                  whileHover={{ opacity: [0, 1] }}
+                  transition={{
+                    duration: 0.25,
+                    ease: 'easeInOut',
+                    staggerChildren: 0.5,
+                  }}
+                >
+                  <a href={project.codeURL} target="_blank" rel="noreferrer">
+                    <motion.div
+                      whileHover={{ scale: [1, 0.9] }}
+                      transition={{ duration: 0.25 }}
+                    >
+                      <Code size={32} />
+                    </motion.div>
+                  </a>
+                  {project.projectURL && (
+                    <a
+                      href={project.projectURL}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <motion.div
+                        whileHover={{ scale: [1, 0.9] }}
+                        transition={{ duration: 0.25 }}
+                      >
+                        <Eye size={32} />
+                      </motion.div>
+                    </a>
+                  )}
+                </motion.div>
                 {project.imageUrl.map((img, i) => (
                   <Image
                     key={`${project.id}_${i}`}
