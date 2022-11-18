@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { Code, Eye } from 'phosphor-react';
+import { useState } from 'react';
 import Button from '../components/Button';
 import Card from '../components/Card';
 import { useGetProjectsQuery } from '../graphql/generated';
@@ -8,10 +9,18 @@ import styles from '../styles/Projects.module.scss';
 
 function Projects() {
   const { data } = useGetProjectsQuery();
+  const [selectedFilter, setSelectedFilter] = useState<string>('Todos');
 
   if (!data?.projects) {
-    return <p>Error...</p>;
+    return <p>...</p>;
   }
+
+  const allTags = ['Todos'];
+  data.projects.map((project) => {
+    project.tags.map((tag) => {
+      if (!allTags.includes(tag)) allTags.push(tag);
+    });
+  });
 
   return (
     <section id="projects" className={styles.container}>
@@ -19,9 +28,15 @@ function Projects() {
         Meus <span>Projetos</span>
       </h1>
       <ul className={styles.searchList}>
-        {['UI/UX', 'ReactJS', 'Typescript', 'All'].map((name, i) => (
+        {allTags.map((name, i) => (
           <li key={i}>
-            <Button color="secondary">{name}</Button>
+            <Button
+              color="secondary"
+              onClick={() => setSelectedFilter(name)}
+              isSelected={selectedFilter === name}
+            >
+              {name}
+            </Button>
           </li>
         ))}
       </ul>

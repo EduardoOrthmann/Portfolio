@@ -8,6 +8,7 @@ interface ButtonProps {
   disabled?: boolean;
   type?: 'button' | 'submit';
   icon?: JSX.Element;
+  isSelected?: boolean;
 }
 
 function Button({
@@ -17,6 +18,7 @@ function Button({
   color = 'primary',
   disabled,
   type = 'button',
+  isSelected = false,
 }: ButtonProps) {
   return (
     <button
@@ -24,6 +26,7 @@ function Button({
         [styles.primary]: color === 'primary',
         [styles.secondary]: color === 'secondary',
         [styles.purple]: color === 'purple',
+        [styles.selected]: isSelected === true,
       })}
       type={type}
       onClick={onClick}

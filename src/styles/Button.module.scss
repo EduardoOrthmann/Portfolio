@@ -28,7 +28,12 @@
 
 .secondary {
   color: #000;
-  background: #fff
+  background: #fff;
+
+  &.selected {
+    color: #fff;
+    background: var(--secondary-color);
+  }
 }
 
 .purple {

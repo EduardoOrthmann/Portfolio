@@ -11,6 +11,7 @@
     "@typescript-eslint/no-unused-vars": "error",
     "@typescript-eslint/no-explicit-any": "error",
     "import/extensions": 0,
-    "react/display-name": 0
+    "react/display-name": 0,
+    "array-callback-return": 0
   }
 }
