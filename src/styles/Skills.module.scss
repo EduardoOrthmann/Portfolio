@@ -1,0 +1,80 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3rem;
+  gap: 4rem;
+}
+
+.headText {
+  font-size: 2.75rem;
+  font-weight: 800;
+  color: var(--black-color);
+  text-transform: capitalize;
+
+  span {
+    color: var(--secondary-color);
+  }
+
+  @media screen and (min-width: 2000px) {
+    font-size: 4rem;
+  }
+
+  @media screen and (max-width: 450px) {
+    font-size: 2rem;
+  }
+}
+
+.skillsList {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+
+  max-width: 760px;
+}
+
+.skillItem {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  gap: 0.5rem;
+
+  transition: all 0.3s ease-in-out;
+
+  div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+
+    transition: all 0.3s ease;
+
+    img {
+      width: 50%;
+      height: 50%;
+    }
+
+    &:hover {
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
+    }
+
+    @media screen and (min-width: 2000px) {
+      width: 150px;
+      height: 150px;
+    }
+
+    @media screen and (max-width: 450px) {
+      width: 70px;
+      height: 70px;
+    }
+  }
+
+  p {
+    font-weight: 500;
+  }
+}

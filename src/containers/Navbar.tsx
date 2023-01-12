@@ -3,14 +3,21 @@ import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import styles from '../styles/Navbar.module.scss';
 
+interface NavbarLinks {
+  id: number,
+  name: string,
+  to: string
+}
+
 function Navbar() {
   const [toggleNavbar, setToggleNavbar] = useState<boolean>(false);
 
-  const links = [
+  const links: NavbarLinks[] = [
     { name: 'Home', to: '#home', id: 1 },
     { name: 'Projetos', to: '#projects', id: 2 },
     { name: 'Habilidades', to: '#skills', id: 3 },
-    { name: 'Contato', to: '#contact', id: 4 },
+    { name: 'Experiências', to: '#experiences', id: 4 },
+    { name: 'Contato', to: '#contact', id: 5 },
   ];
 
   const itemVariants = {
