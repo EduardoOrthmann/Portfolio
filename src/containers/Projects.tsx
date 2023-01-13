@@ -75,6 +75,7 @@ function Projects() {
                         href={project.codeURL}
                         target="_blank"
                         rel="noreferrer"
+                        title="vizualizar código do projeto"
                       >
                         <motion.div
                           whileHover={{ scale: [1, 0.9] }}
@@ -88,6 +89,7 @@ function Projects() {
                           href={project.projectURL}
                           target="_blank"
                           rel="noreferrer"
+                          title="vizualizar projeto online"
                         >
                           <motion.div
                             whileHover={{ scale: [1, 0.9] }}

@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import Contact from '../containers/Contact';
+import Experiences from '../containers/Experiences';
 import HomePage from '../containers/HomePage';
 import Navbar from '../containers/Navbar';
 import Projects from '../containers/Projects';
@@ -19,6 +20,7 @@ export default function Home() {
         <HomePage />
         <Projects />
         <Skills />
+        <Experiences />
         <Contact />
       </main>
     </div>
