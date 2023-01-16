@@ -1,4 +1,4 @@
-import { Briefcase, GraduationCap } from 'phosphor-react';
+import { Briefcase, CalendarBlank, GraduationCap } from 'phosphor-react';
 import { useGetWorkExperiencesQuery } from '../graphql/generated';
 import styles from '../styles/Experiences.module.scss';
 
@@ -27,16 +27,21 @@ function Experiences() {
           </span>
         </div>
         <div className={styles.experiencesContent}>
+          <span className={styles.centerLine}></span>
           {data.workExperiences.map((experience) => (
-            <div key={experience.id}>
-              <h2>{experience.role}</h2>
-              <div>
-                <span>{experience.company}</span>
-                {/* colocar setinha de abre e fecha para a descrição */}
+            <div key={experience.id} className={styles.experienceItem}>
+              <h3>{experience.role}</h3>
+              <details>
+                <summary>{experience.company}</summary>
                 <p>{experience.description}</p>
-              </div>
-              <span>
-                {new Date(experience.startDate).getFullYear()} - {new Date(experience.endDate).getFullYear()}
+              </details>
+              <span className={styles.experienceDuration}>
+                <CalendarBlank size={20} />
+                <p>
+                  {experience.endDate
+                    ? `${new Date(experience.startDate).getFullYear()} - ${new Date(experience.endDate).getFullYear()}`
+                    : `${new Date(experience.startDate).getFullYear()} - presente`}
+                </p>
               </span>
             </div>
           ))}

@@ -39,20 +39,72 @@
 }
 
 .experiencesContainer {
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 5rem;
+}
 
-  .experiencesNav {
+.experiencesNav {
+  display: flex;
+  gap: 4rem;
+  font-size: 1.1em;
+
+  span {
     display: flex;
-    gap: 4rem;
-    font-size: 1.1em;
+    align-items: center;
+    gap: 0.5rem;
+  }
+}
 
-    span {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
+.experiencesContent {
+  width: 60%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+  gap: 2rem;
+
+  .experienceItem {
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    background-color: hsla(0, 0%, 33%, 0.082);
+    padding: 1rem;
+    border-radius: 1rem;
+
+    &:nth-child(even) {
+      align-self: flex-start;
+    }
+    
+    &:nth-child(odd) {
+      align-self: flex-end;
+    }
+
+    details summary {
+      cursor: pointer;
+    }
+
+    details p {
+      margin-left: 1rem;
     }
   }
+}
+
+.centerLine {
+  position: absolute;
+  height: 100%;
+  width: 4px;
+  background: var(--secondary-color);
+  left: 50%;
+  top: 20px;
+}
+
+.experienceDuration {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  color: var(--gray-color);
 }

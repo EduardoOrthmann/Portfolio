@@ -1,0 +1,9 @@
+query GetAcademicExperiences {
+  academicExperiences {
+    startDate
+    endDate
+    title
+    institute
+    id
+  }
+}
