@@ -1,9 +1,23 @@
 import { Briefcase, CalendarBlank, GraduationCap } from 'phosphor-react';
+import { useState } from 'react';
+import Button from '../components/Button';
 import { useGetWorkExperiencesQuery } from '../graphql/generated';
 import styles from '../styles/Experiences.module.scss';
 
 function Experiences() {
+  const buttonNames = [
+    {
+      name: 'Acadêmico',
+      icon: <GraduationCap size={32} />,
+    },
+    {
+      name: 'Profissional',
+      icon: <Briefcase size={32} />,
+    },
+  ];
+
   const { data } = useGetWorkExperiencesQuery();
+  const [active, setActive] = useState(buttonNames[0].name);
 
   if (!data?.workExperiences) {
     return <p>...</p>;
@@ -17,32 +31,35 @@ function Experiences() {
       </header>
       <div className={styles.experiencesContainer}>
         <div className={styles.experiencesNav}>
-          <span>
-            <GraduationCap size={32} />
-            Acadêmica
-          </span>
-          <span>
-            <Briefcase size={32} />
-            Profissional
-          </span>
+          {buttonNames.map(({ name, icon }) => (
+            <Button key={name} color="backgroundless" onClick={() => setActive(name)} isSelected={active === name}>
+              {icon}
+              {name}
+            </Button>
+          ))}
         </div>
+
         <div className={styles.experiencesContent}>
-          <span className={styles.centerLine}></span>
+          <span className={styles.line}></span>
           {data.workExperiences.map((experience) => (
             <div key={experience.id} className={styles.experienceItem}>
-              <h3>{experience.role}</h3>
-              <details>
-                <summary>{experience.company}</summary>
-                <p>{experience.description}</p>
-              </details>
-              <span className={styles.experienceDuration}>
-                <CalendarBlank size={20} />
-                <p>
-                  {experience.endDate
-                    ? `${new Date(experience.startDate).getFullYear()} - ${new Date(experience.endDate).getFullYear()}`
-                    : `${new Date(experience.startDate).getFullYear()} - presente`}
-                </p>
-              </span>
+              <div>
+                <h3>{experience.role}</h3>
+                <details>
+                  <summary>{experience.company}</summary>
+                  <p>{experience.description}</p>
+                </details>
+                <span className={styles.experienceDuration}>
+                  <CalendarBlank size={20} />
+                  <p>
+                    {experience.endDate
+                      ? `${new Date(experience.startDate).getFullYear()} - ${new Date(
+                          experience.endDate
+                        ).getFullYear()}`
+                      : `${new Date(experience.startDate).getFullYear()} - presente`}
+                  </p>
+                </span>
+              </div>
             </div>
           ))}
         </div>

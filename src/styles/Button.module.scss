@@ -40,3 +40,13 @@
   color: #fff;
   background: var(--secondary-color);
 }
+
+.backgroundless {
+  color: #000;
+  background: transparent;
+
+  &.selected {
+    color: var(--secondary-color);
+    background: transparent;
+  }
+}

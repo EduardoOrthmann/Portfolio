@@ -4,7 +4,7 @@ import styles from '../styles/Button.module.scss';
 interface ButtonProps {
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   children?: React.ReactNode;
-  color?: 'primary' | 'secondary' | 'purple';
+  color?: 'primary' | 'secondary' | 'purple' | 'backgroundless';
   disabled?: boolean;
   type?: 'button' | 'submit';
   icon?: JSX.Element;
@@ -26,6 +26,7 @@ function Button({
         [styles.primary]: color === 'primary',
         [styles.secondary]: color === 'secondary',
         [styles.purple]: color === 'purple',
+        [styles.backgroundless]: color === 'backgroundless',
         [styles.selected]: isSelected === true,
       })}
       type={type}

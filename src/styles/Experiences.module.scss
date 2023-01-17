@@ -42,6 +42,7 @@
   width: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   gap: 5rem;
 }
@@ -49,57 +50,36 @@
 .experiencesNav {
   display: flex;
   gap: 4rem;
-  font-size: 1.1em;
-
-  span {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
+  font-size: 2em;
 }
 
 .experiencesContent {
-  width: 60%;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  position: relative;
-  gap: 2rem;
+  display: grid;
+  grid-template-columns: 1fr 5px 1fr;
+  column-gap: 2rem;
 
   .experienceItem {
     width: 400px;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    background-color: hsla(0, 0%, 33%, 0.082);
-    padding: 1rem;
-    border-radius: 1rem;
+    grid-column: 1/1;
 
-    &:nth-child(even) {
-      align-self: flex-start;
-    }
-    
     &:nth-child(odd) {
-      align-self: flex-end;
+      grid-column: 3/3;
+      margin-top: 85px;
     }
 
-    details summary {
-      cursor: pointer;
-    }
-
-    details p {
-      margin-left: 1rem;
+    & > div {
+      background-color: rgba(221, 221, 221, 0.644);
+      border-radius: 0.5rem;
+      padding: 0.5rem;
     }
   }
 }
 
-.centerLine {
-  position: absolute;
-  height: 100%;
-  width: 4px;
-  background: var(--secondary-color);
-  left: 50%;
-  top: 20px;
+.line {
+  grid-column: 2/2;
+  grid-row: 1/50;
+  background-color: black;
+  width: 5px;
 }
 
 .experienceDuration {
