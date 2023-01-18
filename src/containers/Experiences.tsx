@@ -1,25 +1,28 @@
 import { Briefcase, CalendarBlank, GraduationCap } from 'phosphor-react';
 import { useState } from 'react';
+import { VerticalTimeline, VerticalTimelineElement } from 'react-vertical-timeline-component';
 import Button from '../components/Button';
-import { useGetWorkExperiencesQuery } from '../graphql/generated';
+import { useGetWorkExperiencesQuery, useGetAcademicExperiencesQuery } from '../graphql/generated';
 import styles from '../styles/Experiences.module.scss';
+import 'react-vertical-timeline-component/style.min.css';
 
 function Experiences() {
   const buttonNames = [
     {
-      name: 'Acadêmico',
-      icon: <GraduationCap size={32} />,
-    },
-    {
       name: 'Profissional',
       icon: <Briefcase size={32} />,
     },
+    {
+      name: 'Acadêmico',
+      icon: <GraduationCap size={32} />,
+    },
   ];
 
-  const { data } = useGetWorkExperiencesQuery();
+  const { data: workData } = useGetWorkExperiencesQuery();
+  const { data: academicData } = useGetAcademicExperiencesQuery();
   const [active, setActive] = useState(buttonNames[0].name);
 
-  if (!data?.workExperiences) {
+  if (!workData?.workExperiences || !academicData?.academicExperiences) {
     return <p>...</p>;
   }
 
@@ -39,30 +42,58 @@ function Experiences() {
           ))}
         </div>
 
-        <div className={styles.experiencesContent}>
-          <span className={styles.line}></span>
-          {data.workExperiences.map((experience) => (
-            <div key={experience.id} className={styles.experienceItem}>
-              <div>
-                <h3>{experience.role}</h3>
-                <details>
-                  <summary>{experience.company}</summary>
-                  <p>{experience.description}</p>
-                </details>
-                <span className={styles.experienceDuration}>
-                  <CalendarBlank size={20} />
-                  <p>
-                    {experience.endDate
-                      ? `${new Date(experience.startDate).getFullYear()} - ${new Date(
-                          experience.endDate
-                        ).getFullYear()}`
-                      : `${new Date(experience.startDate).getFullYear()} - presente`}
-                  </p>
-                </span>
-              </div>
-            </div>
-          ))}
-        </div>
+        <VerticalTimeline lineColor=" #313bac">
+          {active === buttonNames[0].name
+            ? workData.workExperiences.map((experience) => (
+                <VerticalTimelineElement
+                  key={experience.id}
+                  icon={<Briefcase size={32} />}
+                  iconStyle={{ background: '#313bac', color: '#fff' }}
+                  contentArrowStyle={{ borderRight: '7px solid  #edf2f8' }}
+                  contentStyle={{ background: '#edf2f8', color: '#000', borderTop: '5px solid #313bac' }}
+                >
+                  <h3>{experience.role}</h3>
+                  <details>
+                    <summary>{experience.company}</summary>
+                    <p>{experience.description}</p>
+                  </details>
+                  <span className={styles.experienceDuration}>
+                    <CalendarBlank size={20} />
+                    <p>
+                      {experience.endDate
+                        ? `${new Date(experience.startDate).getFullYear()} - ${new Date(
+                            experience.endDate
+                          ).getFullYear()}`
+                        : `${new Date(experience.startDate).getFullYear()} - presente`}
+                    </p>
+                  </span>
+                </VerticalTimelineElement>
+              ))
+            : academicData.academicExperiences.map((experience) => (
+                <VerticalTimelineElement
+                  key={experience.id}
+                  icon={<Briefcase size={32} />}
+                  iconStyle={{ background: '#313bac', color: '#fff' }}
+                  contentArrowStyle={{ borderRight: '7px solid  #edf2f8' }}
+                  contentStyle={{ background: '#edf2f8', color: '#000', borderTop: '5px solid #313bac' }}
+                >
+                  <h3>{experience.title}</h3>
+                  <details>
+                    <summary>{experience.institute}</summary>
+                  </details>
+                  <span className={styles.experienceDuration}>
+                    <CalendarBlank size={20} />
+                    <p>
+                      {experience.endDate
+                        ? `${new Date(experience.startDate).getFullYear()} - ${new Date(
+                            experience.endDate
+                          ).getFullYear()}`
+                        : `${new Date(experience.startDate).getFullYear()} - presente`}
+                    </p>
+                  </span>
+                </VerticalTimelineElement>
+              ))}
+        </VerticalTimeline>
       </div>
     </section>
   );

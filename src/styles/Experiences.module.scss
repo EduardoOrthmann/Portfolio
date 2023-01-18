@@ -53,33 +53,8 @@
   font-size: 2em;
 }
 
-.experiencesContent {
-  display: grid;
-  grid-template-columns: 1fr 5px 1fr;
-  column-gap: 2rem;
-
-  .experienceItem {
-    width: 400px;
-    grid-column: 1/1;
-
-    &:nth-child(odd) {
-      grid-column: 3/3;
-      margin-top: 85px;
-    }
-
-    & > div {
-      background-color: rgba(221, 221, 221, 0.644);
-      border-radius: 0.5rem;
-      padding: 0.5rem;
-    }
-  }
-}
-
-.line {
-  grid-column: 2/2;
-  grid-row: 1/50;
-  background-color: black;
-  width: 5px;
+.experienceItem {
+  border-top: 5px solid var(--secondary-color);
 }
 
 .experienceDuration {
