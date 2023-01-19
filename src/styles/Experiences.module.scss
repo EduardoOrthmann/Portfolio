@@ -45,16 +45,66 @@
   justify-content: center;
   align-items: center;
   gap: 5rem;
+
+  details {
+    &[open] summary ~ * {
+      animation: toggle 0.25s ease-in-out;
+    }
+
+    @keyframes toggle {
+      0% {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0px);
+      }
+    }
+
+    &[open] svg {
+      transform: rotate(180deg);
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    summary {
+      position: relative;
+      padding: 0.5rem 0;
+      display: flex;
+      justify-content: space-between;
+
+      list-style: none;
+
+      &:focus {
+        outline: none;
+      }
+    }
+    
+    summary svg {
+      transition: all 0.3s ease;
+    }
+  }
+
+  .summaryTitle {
+    font-weight: 500;
+    color: var(--secondary-color);
+    user-select: none;
+  }
+
+  .summaryContent {
+    padding: 1rem 0;
+    border-top: 1px solid #e2e8f0;
+    cursor: default;
+  }
 }
 
 .experiencesNav {
   display: flex;
   gap: 4rem;
   font-size: 2em;
-}
-
-.experienceItem {
-  border-top: 5px solid var(--secondary-color);
 }
 
 .experienceDuration {
