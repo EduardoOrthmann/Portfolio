@@ -1,0 +1,100 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 6rem 3rem;
+  gap: 4rem;
+}
+
+.headText {
+  font-size: 2.75rem;
+  font-weight: 800;
+  color: var(--black-color);
+  text-transform: capitalize;
+
+  span {
+    color: var(--secondary-color);
+  }
+
+  @media screen and (min-width: 2000px) {
+    font-size: 4rem;
+  }
+
+  @media screen and (max-width: 450px) {
+    font-size: 2rem;
+  }
+}
+
+.links {
+  display: flex;
+  gap: 8rem;
+  color: var(--gray-color);
+  font-weight: 500;
+
+  div:nth-child(1) {
+    transition: all 0.3s ease-in-out;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem;
+    border-radius: 1rem;
+
+    background-color: #ffebed;
+    box-shadow: 0 0 25px #f2f7fb;
+  }
+
+  div:nth-child(2) {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem;
+    border-radius: 1rem;
+
+    background-color: #dff1ff;
+    box-shadow: 0 0 25px #f2f7fb;
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  align-items: center;
+  gap: 1rem;
+
+  div {
+    width: 100%;
+    border-radius: 10px;
+    cursor: pointer;
+
+    transition: all 0.3s ease-in-out;
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 0.95rem;
+      border: none;
+      border-radius: 7px;
+      outline: none;
+    }
+
+    textarea {
+      height: 170px;
+    }
+
+    &:hover {
+      box-shadow: 0 0 25px rgb(0, 0, 0, 0.1);
+    }
+  }
+
+  button {
+    width: 200px;
+    padding: 1.2rem 1rem;
+    font-size: 1em;
+    font-weight: 500;
+  }
+
+  @media screen and (max-width: 900px) {
+    width: 100%;
+  }
+}

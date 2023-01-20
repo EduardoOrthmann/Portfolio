@@ -38,11 +38,7 @@ function Projects() {
       <ul className={styles.searchList}>
         {allTags.map((name, i) => (
           <li key={i}>
-            <Button
-              color="secondary"
-              onClick={() => setSelectedFilter(name)}
-              isSelected={selectedFilter === name}
-            >
+            <Button color="secondary" onClick={() => setSelectedFilter(name)} isSelected={selectedFilter === name}>
               {name}
             </Button>
           </li>
@@ -71,43 +67,21 @@ function Projects() {
                         staggerChildren: 0.5,
                       }}
                     >
-                      <a
-                        href={project.codeURL}
-                        target="_blank"
-                        rel="noreferrer"
-                        title="vizualizar código do projeto"
-                      >
-                        <motion.div
-                          whileHover={{ scale: [1, 0.9] }}
-                          transition={{ duration: 0.25 }}
-                        >
+                      <a href={project.codeURL} target="_blank" rel="noreferrer" title="vizualizar código do projeto">
+                        <motion.div whileHover={{ scale: [1, 0.9] }} transition={{ duration: 0.25 }}>
                           <Code size={32} />
                         </motion.div>
                       </a>
                       {project.projectURL && (
-                        <a
-                          href={project.projectURL}
-                          target="_blank"
-                          rel="noreferrer"
-                          title="vizualizar projeto online"
-                        >
-                          <motion.div
-                            whileHover={{ scale: [1, 0.9] }}
-                            transition={{ duration: 0.25 }}
-                          >
+                        <a href={project.projectURL} target="_blank" rel="noreferrer" title="vizualizar projeto online">
+                          <motion.div whileHover={{ scale: [1, 0.9] }} transition={{ duration: 0.25 }}>
                             <Eye size={32} />
                           </motion.div>
                         </a>
                       )}
                     </motion.div>
                     {project.imageUrl.map((img, i) => (
-                      <Image
-                        key={`${project.id}_${i}`}
-                        src={img.url}
-                        width={550}
-                        height={300}
-                        alt="foto do projeto"
-                      />
+                      <Image key={`${project.id}_${i}`} src={img.url} width={550} height={300} alt="foto do projeto" />
                     ))}
                     <span>{project.tags[0]}</span>
                   </div>

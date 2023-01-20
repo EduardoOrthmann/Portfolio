@@ -82,7 +82,7 @@ function Experiences() {
             : academicData.academicExperiences.map((experience) => (
                 <VerticalTimelineElement
                   key={experience.id}
-                  icon={<Briefcase size={32} />}
+                  icon={<GraduationCap size={32} />}
                   iconStyle={{ background: '#313bac', color: '#fff' }}
                   contentArrowStyle={{ borderRight: '7px solid #fff' }}
                   contentStyle={{
