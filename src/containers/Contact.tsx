@@ -13,27 +13,35 @@ function Contact() {
   return (
     <section id="contact" className={styles.container}>
       <h1 className={styles.headText}>Contato</h1>
-      <div className={styles.links}>
+      <div className={styles.content}>
         <div>
-          <EnvelopeSimple size={32} />
-          {data.contact.email}
+          <div className={styles.links}>
+            <div>
+              <EnvelopeSimple size={40} />
+              <strong>Email</strong>
+              <a href={`http://malito:${data.contact.email}`} target="_blank" rel="noreferrer">
+                {data.contact.email}
+              </a>
+            </div>
+            <div>
+              <WhatsappLogo size={40} />
+              <strong>Whatsapp</strong>
+              {data.contact.phoneNumber}
+            </div>
+          </div>
         </div>
-        <div>
-          <WhatsappLogo size={32} />
-          {data.contact.phoneNumber}
+        <div className={styles.form}>
+          <div>
+            <input type="text" placeholder="Seu nome" />
+          </div>
+          <div>
+            <input type="email" placeholder="Seu email" />
+          </div>
+          <div>
+            <textarea placeholder="Sua mensagem"></textarea>
+          </div>
+          <Button color="purple">Enviar Mensagem</Button>
         </div>
-      </div>
-      <div className={styles.form}>
-        <div>
-          <input type="text" placeholder="Seu nome" />
-        </div>
-        <div>
-          <input type="email" placeholder="Seu email" />
-        </div>
-        <div>
-          <textarea placeholder="Sua mensagem"></textarea>
-        </div>
-        <Button color="purple">Enviar Mensagem</Button>
       </div>
     </section>
   );

@@ -1,0 +1,6 @@
+query GetProjectsTags {
+  projectTags {
+    id
+    tag
+  }
+}

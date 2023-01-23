@@ -4,27 +4,24 @@ import { Code, Eye } from 'phosphor-react';
 import { useState } from 'react';
 import Button from '../components/Button';
 import Card from '../components/Card';
-import { useGetProjectsQuery } from '../graphql/generated';
+import { useGetProjectsQuery, useGetProjectsTagsQuery } from '../graphql/generated';
 import styles from '../styles/Projects.module.scss';
 
 function Projects() {
-  const { data } = useGetProjectsQuery();
+  const { data: projectData } = useGetProjectsQuery();
+  const { data: tagsData } = useGetProjectsTagsQuery();
   const [selectedFilter, setSelectedFilter] = useState<string>('Todos');
 
-  if (!data?.projects) {
+  if (!projectData?.projects || !tagsData?.projectTags) {
     return <p>...</p>;
   }
 
   const allTags = ['Todos'];
-  data.projects.map((project) => {
-    project.tags.map((tag) => {
-      if (!allTags.includes(tag)) allTags.push(tag);
-    });
-  });
+  tagsData.projectTags.map((tag) => allTags.push(tag.tag));
 
-  const filteredProjects = data.projects.filter((project) => {
+  const filteredProjects = projectData.projects.filter((project) => {
     if (selectedFilter !== 'Todos') {
-      return project.tags.includes(selectedFilter);
+      return project.tags.some((tag) => tag.tag.includes(selectedFilter));
     }
 
     return project;
@@ -80,10 +77,15 @@ function Projects() {
                         </a>
                       )}
                     </motion.div>
-                    {project.imageUrl.map((img, i) => (
-                      <Image key={`${project.id}_${i}`} src={img.url} width={550} height={300} alt="foto do projeto" />
+                    {project.imageUrl.map((img) => (
+                      <Image
+                        key={`${project.id}_${img}`}
+                        src={img.url}
+                        width={550}
+                        height={300}
+                        alt="foto do projeto"
+                      />
                     ))}
-                    <span>{project.tags[0]}</span>
                   </div>
                 </Card.Image>
                 <Card.Content>
@@ -92,6 +94,29 @@ function Projects() {
                     <p>{project.description}</p>
                   </div>
                 </Card.Content>
+                <div className={styles.tagsContainer}>
+                  <span>Tags:</span>
+                  <div className={styles.tags}>
+                    {project.tags.map(
+                      ({
+                        tag,
+                        backgroundColor: {
+                          rgba: { r, g, b, a },
+                        },
+                        id,
+                      }) => (
+                        <span
+                          key={id}
+                          style={{
+                            backgroundColor: `rgba(${r}, ${g}, ${b}, ${a})`,
+                          }}
+                        >
+                          <p>{tag}</p>
+                        </span>
+                      )
+                    )}
+                  </div>
+                </div>
               </Card>
             </motion.div>
           ))}

@@ -2024,6 +2024,8 @@ export type Mutation = {
   createProfile?: Maybe<Profile>;
   /** Create one project */
   createProject?: Maybe<Project>;
+  /** Create one projectTag */
+  createProjectTag?: Maybe<ProjectTag>;
   /** Create one scheduledRelease */
   createScheduledRelease?: Maybe<ScheduledRelease>;
   /** Create one skill */
@@ -2065,6 +2067,13 @@ export type Mutation = {
   /** Delete many Profile documents, return deleted documents */
   deleteManyProfilesConnection: ProfileConnection;
   /**
+   * Delete many ProjectTag documents
+   * @deprecated Please use the new paginated many mutation (deleteManyProjectTagsConnection)
+   */
+  deleteManyProjectTags: BatchPayload;
+  /** Delete many ProjectTag documents, return deleted documents */
+  deleteManyProjectTagsConnection: ProjectTagConnection;
+  /**
    * Delete many Project documents
    * @deprecated Please use the new paginated many mutation (deleteManyProjectsConnection)
    */
@@ -2089,6 +2098,8 @@ export type Mutation = {
   deleteProfile?: Maybe<Profile>;
   /** Delete one project from _all_ existing stages. Returns deleted document. */
   deleteProject?: Maybe<Project>;
+  /** Delete one projectTag from _all_ existing stages. Returns deleted document. */
+  deleteProjectTag?: Maybe<ProjectTag>;
   /** Delete and return scheduled operation */
   deleteScheduledOperation?: Maybe<ScheduledOperation>;
   /** Delete one scheduledRelease from _all_ existing stages. Returns deleted document. */
@@ -2132,6 +2143,13 @@ export type Mutation = {
   /** Publish many Profile documents */
   publishManyProfilesConnection: ProfileConnection;
   /**
+   * Publish many ProjectTag documents
+   * @deprecated Please use the new paginated many mutation (publishManyProjectTagsConnection)
+   */
+  publishManyProjectTags: BatchPayload;
+  /** Publish many ProjectTag documents */
+  publishManyProjectTagsConnection: ProjectTagConnection;
+  /**
    * Publish many Project documents
    * @deprecated Please use the new paginated many mutation (publishManyProjectsConnection)
    */
@@ -2156,6 +2174,8 @@ export type Mutation = {
   publishProfile?: Maybe<Profile>;
   /** Publish one project */
   publishProject?: Maybe<Project>;
+  /** Publish one projectTag */
+  publishProjectTag?: Maybe<ProjectTag>;
   /** Publish one skill */
   publishSkill?: Maybe<Skill>;
   /** Publish one workExperience */
@@ -2170,6 +2190,8 @@ export type Mutation = {
   schedulePublishProfile?: Maybe<Profile>;
   /** Schedule to publish one project */
   schedulePublishProject?: Maybe<Project>;
+  /** Schedule to publish one projectTag */
+  schedulePublishProjectTag?: Maybe<ProjectTag>;
   /** Schedule to publish one skill */
   schedulePublishSkill?: Maybe<Skill>;
   /** Schedule to publish one workExperience */
@@ -2184,6 +2206,8 @@ export type Mutation = {
   scheduleUnpublishProfile?: Maybe<Profile>;
   /** Unpublish one project from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   scheduleUnpublishProject?: Maybe<Project>;
+  /** Unpublish one projectTag from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
+  scheduleUnpublishProjectTag?: Maybe<ProjectTag>;
   /** Unpublish one skill from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   scheduleUnpublishSkill?: Maybe<Skill>;
   /** Unpublish one workExperience from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
@@ -2223,6 +2247,13 @@ export type Mutation = {
   /** Find many Profile documents that match criteria in specified stage and unpublish from target stages */
   unpublishManyProfilesConnection: ProfileConnection;
   /**
+   * Unpublish many ProjectTag documents
+   * @deprecated Please use the new paginated many mutation (unpublishManyProjectTagsConnection)
+   */
+  unpublishManyProjectTags: BatchPayload;
+  /** Find many ProjectTag documents that match criteria in specified stage and unpublish from target stages */
+  unpublishManyProjectTagsConnection: ProjectTagConnection;
+  /**
    * Unpublish many Project documents
    * @deprecated Please use the new paginated many mutation (unpublishManyProjectsConnection)
    */
@@ -2247,6 +2278,8 @@ export type Mutation = {
   unpublishProfile?: Maybe<Profile>;
   /** Unpublish one project from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   unpublishProject?: Maybe<Project>;
+  /** Unpublish one projectTag from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
+  unpublishProjectTag?: Maybe<ProjectTag>;
   /** Unpublish one skill from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   unpublishSkill?: Maybe<Skill>;
   /** Unpublish one workExperience from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
@@ -2286,6 +2319,13 @@ export type Mutation = {
   /** Update many Profile documents */
   updateManyProfilesConnection: ProfileConnection;
   /**
+   * Update many projectTags
+   * @deprecated Please use the new paginated many mutation (updateManyProjectTagsConnection)
+   */
+  updateManyProjectTags: BatchPayload;
+  /** Update many ProjectTag documents */
+  updateManyProjectTagsConnection: ProjectTagConnection;
+  /**
    * Update many projects
    * @deprecated Please use the new paginated many mutation (updateManyProjectsConnection)
    */
@@ -2310,6 +2350,8 @@ export type Mutation = {
   updateProfile?: Maybe<Profile>;
   /** Update one project */
   updateProject?: Maybe<Project>;
+  /** Update one projectTag */
+  updateProjectTag?: Maybe<ProjectTag>;
   /** Update one scheduledRelease */
   updateScheduledRelease?: Maybe<ScheduledRelease>;
   /** Update one skill */
@@ -2326,6 +2368,8 @@ export type Mutation = {
   upsertProfile?: Maybe<Profile>;
   /** Upsert one project */
   upsertProject?: Maybe<Project>;
+  /** Upsert one projectTag */
+  upsertProjectTag?: Maybe<ProjectTag>;
   /** Upsert one skill */
   upsertSkill?: Maybe<Skill>;
   /** Upsert one workExperience */
@@ -2355,6 +2399,11 @@ export type MutationCreateProfileArgs = {
 
 export type MutationCreateProjectArgs = {
   data: ProjectCreateInput;
+};
+
+
+export type MutationCreateProjectTagArgs = {
+  data: ProjectTagCreateInput;
 };
 
 
@@ -2448,6 +2497,21 @@ export type MutationDeleteManyProfilesConnectionArgs = {
 };
 
 
+export type MutationDeleteManyProjectTagsArgs = {
+  where?: InputMaybe<ProjectTagManyWhereInput>;
+};
+
+
+export type MutationDeleteManyProjectTagsConnectionArgs = {
+  after?: InputMaybe<Scalars['ID']>;
+  before?: InputMaybe<Scalars['ID']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<ProjectTagManyWhereInput>;
+};
+
+
 export type MutationDeleteManyProjectsArgs = {
   where?: InputMaybe<ProjectManyWhereInput>;
 };
@@ -2500,6 +2564,11 @@ export type MutationDeleteProfileArgs = {
 
 export type MutationDeleteProjectArgs = {
   where: ProjectWhereUniqueInput;
+};
+
+
+export type MutationDeleteProjectTagArgs = {
+  where: ProjectTagWhereUniqueInput;
 };
 
 
@@ -2622,6 +2691,24 @@ export type MutationPublishManyProfilesConnectionArgs = {
 };
 
 
+export type MutationPublishManyProjectTagsArgs = {
+  to?: Array<Stage>;
+  where?: InputMaybe<ProjectTagManyWhereInput>;
+};
+
+
+export type MutationPublishManyProjectTagsConnectionArgs = {
+  after?: InputMaybe<Scalars['ID']>;
+  before?: InputMaybe<Scalars['ID']>;
+  first?: InputMaybe<Scalars['Int']>;
+  from?: InputMaybe<Stage>;
+  last?: InputMaybe<Scalars['Int']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  to?: Array<Stage>;
+  where?: InputMaybe<ProjectTagManyWhereInput>;
+};
+
+
 export type MutationPublishManyProjectsArgs = {
   to?: Array<Stage>;
   where?: InputMaybe<ProjectManyWhereInput>;
@@ -2688,6 +2775,12 @@ export type MutationPublishProjectArgs = {
 };
 
 
+export type MutationPublishProjectTagArgs = {
+  to?: Array<Stage>;
+  where: ProjectTagWhereUniqueInput;
+};
+
+
 export type MutationPublishSkillArgs = {
   to?: Array<Stage>;
   where: SkillWhereUniqueInput;
@@ -2740,6 +2833,14 @@ export type MutationSchedulePublishProjectArgs = {
   releaseId?: InputMaybe<Scalars['String']>;
   to?: Array<Stage>;
   where: ProjectWhereUniqueInput;
+};
+
+
+export type MutationSchedulePublishProjectTagArgs = {
+  releaseAt?: InputMaybe<Scalars['DateTime']>;
+  releaseId?: InputMaybe<Scalars['String']>;
+  to?: Array<Stage>;
+  where: ProjectTagWhereUniqueInput;
 };
 
 
@@ -2798,6 +2899,14 @@ export type MutationScheduleUnpublishProjectArgs = {
   releaseAt?: InputMaybe<Scalars['DateTime']>;
   releaseId?: InputMaybe<Scalars['String']>;
   where: ProjectWhereUniqueInput;
+};
+
+
+export type MutationScheduleUnpublishProjectTagArgs = {
+  from?: Array<Stage>;
+  releaseAt?: InputMaybe<Scalars['DateTime']>;
+  releaseId?: InputMaybe<Scalars['String']>;
+  where: ProjectTagWhereUniqueInput;
 };
 
 
@@ -2913,6 +3022,24 @@ export type MutationUnpublishManyProfilesConnectionArgs = {
 };
 
 
+export type MutationUnpublishManyProjectTagsArgs = {
+  from?: Array<Stage>;
+  where?: InputMaybe<ProjectTagManyWhereInput>;
+};
+
+
+export type MutationUnpublishManyProjectTagsConnectionArgs = {
+  after?: InputMaybe<Scalars['ID']>;
+  before?: InputMaybe<Scalars['ID']>;
+  first?: InputMaybe<Scalars['Int']>;
+  from?: Array<Stage>;
+  last?: InputMaybe<Scalars['Int']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  stage?: InputMaybe<Stage>;
+  where?: InputMaybe<ProjectTagManyWhereInput>;
+};
+
+
 export type MutationUnpublishManyProjectsArgs = {
   from?: Array<Stage>;
   where?: InputMaybe<ProjectManyWhereInput>;
@@ -2976,6 +3103,12 @@ export type MutationUnpublishProfileArgs = {
 export type MutationUnpublishProjectArgs = {
   from?: Array<Stage>;
   where: ProjectWhereUniqueInput;
+};
+
+
+export type MutationUnpublishProjectTagArgs = {
+  from?: Array<Stage>;
+  where: ProjectTagWhereUniqueInput;
 };
 
 
@@ -3077,6 +3210,23 @@ export type MutationUpdateManyProfilesConnectionArgs = {
 };
 
 
+export type MutationUpdateManyProjectTagsArgs = {
+  data: ProjectTagUpdateManyInput;
+  where?: InputMaybe<ProjectTagManyWhereInput>;
+};
+
+
+export type MutationUpdateManyProjectTagsConnectionArgs = {
+  after?: InputMaybe<Scalars['ID']>;
+  before?: InputMaybe<Scalars['ID']>;
+  data: ProjectTagUpdateManyInput;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<ProjectTagManyWhereInput>;
+};
+
+
 export type MutationUpdateManyProjectsArgs = {
   data: ProjectUpdateManyInput;
   where?: InputMaybe<ProjectManyWhereInput>;
@@ -3140,6 +3290,12 @@ export type MutationUpdateProjectArgs = {
 };
 
 
+export type MutationUpdateProjectTagArgs = {
+  data: ProjectTagUpdateInput;
+  where: ProjectTagWhereUniqueInput;
+};
+
+
 export type MutationUpdateScheduledReleaseArgs = {
   data: ScheduledReleaseUpdateInput;
   where: ScheduledReleaseWhereUniqueInput;
@@ -3185,6 +3341,12 @@ export type MutationUpsertProfileArgs = {
 export type MutationUpsertProjectArgs = {
   upsert: ProjectUpsertInput;
   where: ProjectWhereUniqueInput;
+};
+
+
+export type MutationUpsertProjectTagArgs = {
+  upsert: ProjectTagUpsertInput;
+  where: ProjectTagWhereUniqueInput;
 };
 
 
@@ -3756,7 +3918,7 @@ export type Project = Node & {
   scheduledIn: Array<ScheduledOperation>;
   /** System stage field */
   stage: Stage;
-  tags: Array<Scalars['String']>;
+  tags: Array<ProjectTag>;
   title: Scalars['String'];
   /** The time the document was updated */
   updatedAt: Scalars['DateTime'];
@@ -3816,6 +3978,19 @@ export type ProjectScheduledInArgs = {
 };
 
 
+export type ProjectTagsArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
+  last?: InputMaybe<Scalars['Int']>;
+  locales?: InputMaybe<Array<Locale>>;
+  orderBy?: InputMaybe<ProjectTagOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<ProjectTagWhereInput>;
+};
+
+
 export type ProjectUpdatedByArgs = {
   forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
@@ -3844,7 +4019,7 @@ export type ProjectCreateInput = {
   description?: InputMaybe<Scalars['String']>;
   imageUrl: AssetCreateManyInlineInput;
   projectURL?: InputMaybe<Scalars['String']>;
-  tags?: InputMaybe<Array<Scalars['String']>>;
+  tags?: InputMaybe<ProjectTagCreateManyInlineInput>;
   title: Scalars['String'];
   updatedAt?: InputMaybe<Scalars['DateTime']>;
 };
@@ -3999,16 +4174,9 @@ export type ProjectManyWhereInput = {
   scheduledIn_every?: InputMaybe<ScheduledOperationWhereInput>;
   scheduledIn_none?: InputMaybe<ScheduledOperationWhereInput>;
   scheduledIn_some?: InputMaybe<ScheduledOperationWhereInput>;
-  /** Matches if the field array contains *all* items provided to the filter and order does match */
-  tags?: InputMaybe<Array<Scalars['String']>>;
-  /** Matches if the field array contains *all* items provided to the filter */
-  tags_contains_all?: InputMaybe<Array<Scalars['String']>>;
-  /** Matches if the field array does not contain any of the items provided to the filter */
-  tags_contains_none?: InputMaybe<Array<Scalars['String']>>;
-  /** Matches if the field array contains at least one item provided to the filter */
-  tags_contains_some?: InputMaybe<Array<Scalars['String']>>;
-  /** Matches if the field array does not contains *all* items provided to the filter or order does not match */
-  tags_not?: InputMaybe<Array<Scalars['String']>>;
+  tags_every?: InputMaybe<ProjectTagWhereInput>;
+  tags_none?: InputMaybe<ProjectTagWhereInput>;
+  tags_some?: InputMaybe<ProjectTagWhereInput>;
   title?: InputMaybe<Scalars['String']>;
   /** All values containing the given string. */
   title_contains?: InputMaybe<Scalars['String']>;
@@ -4059,20 +4227,454 @@ export enum ProjectOrderByInput {
   ProjectUrlDesc = 'projectURL_DESC',
   PublishedAtAsc = 'publishedAt_ASC',
   PublishedAtDesc = 'publishedAt_DESC',
-  TagsAsc = 'tags_ASC',
-  TagsDesc = 'tags_DESC',
   TitleAsc = 'title_ASC',
   TitleDesc = 'title_DESC',
   UpdatedAtAsc = 'updatedAt_ASC',
   UpdatedAtDesc = 'updatedAt_DESC'
 }
 
+export type ProjectTag = Node & {
+  __typename?: 'ProjectTag';
+  backgroundColor: Color;
+  /** The time the document was created */
+  createdAt: Scalars['DateTime'];
+  /** User that created this document */
+  createdBy?: Maybe<User>;
+  /** Get the document in other stages */
+  documentInStages: Array<ProjectTag>;
+  /** List of ProjectTag versions */
+  history: Array<Version>;
+  /** The unique identifier */
+  id: Scalars['ID'];
+  /** The time the document was published. Null on documents in draft stage. */
+  publishedAt?: Maybe<Scalars['DateTime']>;
+  /** User that last published this document */
+  publishedBy?: Maybe<User>;
+  scheduledIn: Array<ScheduledOperation>;
+  /** System stage field */
+  stage: Stage;
+  tag: Scalars['String'];
+  /** The time the document was updated */
+  updatedAt: Scalars['DateTime'];
+  /** User that last updated this document */
+  updatedBy?: Maybe<User>;
+};
+
+
+export type ProjectTagCreatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
+  locales?: InputMaybe<Array<Locale>>;
+};
+
+
+export type ProjectTagDocumentInStagesArgs = {
+  includeCurrent?: Scalars['Boolean'];
+  inheritLocale?: Scalars['Boolean'];
+  stages?: Array<Stage>;
+};
+
+
+export type ProjectTagHistoryArgs = {
+  limit?: Scalars['Int'];
+  skip?: Scalars['Int'];
+  stageOverride?: InputMaybe<Stage>;
+};
+
+
+export type ProjectTagPublishedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
+  locales?: InputMaybe<Array<Locale>>;
+};
+
+
+export type ProjectTagScheduledInArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
+  last?: InputMaybe<Scalars['Int']>;
+  locales?: InputMaybe<Array<Locale>>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<ScheduledOperationWhereInput>;
+};
+
+
+export type ProjectTagUpdatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
+  locales?: InputMaybe<Array<Locale>>;
+};
+
+export type ProjectTagConnectInput = {
+  /** Allow to specify document position in list of connected documents, will default to appending at end of list */
+  position?: InputMaybe<ConnectPositionInput>;
+  /** Document to connect */
+  where: ProjectTagWhereUniqueInput;
+};
+
+/** A connection to a list of items. */
+export type ProjectTagConnection = {
+  __typename?: 'ProjectTagConnection';
+  aggregate: Aggregate;
+  /** A list of edges. */
+  edges: Array<ProjectTagEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+};
+
+export type ProjectTagCreateInput = {
+  backgroundColor: ColorInput;
+  cld9atw9c0m7r01unecechmu0?: InputMaybe<ProjectCreateManyInlineInput>;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  tag: Scalars['String'];
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
+};
+
+export type ProjectTagCreateManyInlineInput = {
+  /** Connect multiple existing ProjectTag documents */
+  connect?: InputMaybe<Array<ProjectTagWhereUniqueInput>>;
+  /** Create and connect multiple existing ProjectTag documents */
+  create?: InputMaybe<Array<ProjectTagCreateInput>>;
+};
+
+export type ProjectTagCreateOneInlineInput = {
+  /** Connect one existing ProjectTag document */
+  connect?: InputMaybe<ProjectTagWhereUniqueInput>;
+  /** Create and connect one ProjectTag document */
+  create?: InputMaybe<ProjectTagCreateInput>;
+};
+
+/** An edge in a connection. */
+export type ProjectTagEdge = {
+  __typename?: 'ProjectTagEdge';
+  /** A cursor for use in pagination. */
+  cursor: Scalars['String'];
+  /** The item at the end of the edge. */
+  node: ProjectTag;
+};
+
+/** Identifies documents */
+export type ProjectTagManyWhereInput = {
+  /** Logical AND on all given filters. */
+  AND?: InputMaybe<Array<ProjectTagWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: InputMaybe<Array<ProjectTagWhereInput>>;
+  /** Logical OR on all given filters. */
+  OR?: InputMaybe<Array<ProjectTagWhereInput>>;
+  /** Contains search across all appropriate fields. */
+  _search?: InputMaybe<Scalars['String']>;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  createdAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  createdAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  createdAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  /** All values less than the given value. */
+  createdAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  createdAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  createdAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  createdAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  createdBy?: InputMaybe<UserWhereInput>;
+  documentInStages_every?: InputMaybe<ProjectTagWhereStageInput>;
+  documentInStages_none?: InputMaybe<ProjectTagWhereStageInput>;
+  documentInStages_some?: InputMaybe<ProjectTagWhereStageInput>;
+  id?: InputMaybe<Scalars['ID']>;
+  /** All values containing the given string. */
+  id_contains?: InputMaybe<Scalars['ID']>;
+  /** All values ending with the given string. */
+  id_ends_with?: InputMaybe<Scalars['ID']>;
+  /** All values that are contained in given list. */
+  id_in?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** All values that are not equal to given value. */
+  id_not?: InputMaybe<Scalars['ID']>;
+  /** All values not containing the given string. */
+  id_not_contains?: InputMaybe<Scalars['ID']>;
+  /** All values not ending with the given string */
+  id_not_ends_with?: InputMaybe<Scalars['ID']>;
+  /** All values that are not contained in given list. */
+  id_not_in?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** All values not starting with the given string. */
+  id_not_starts_with?: InputMaybe<Scalars['ID']>;
+  /** All values starting with the given string. */
+  id_starts_with?: InputMaybe<Scalars['ID']>;
+  publishedAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  publishedAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  publishedAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  publishedAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  /** All values less than the given value. */
+  publishedAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  publishedAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  publishedAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  publishedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  publishedBy?: InputMaybe<UserWhereInput>;
+  scheduledIn_every?: InputMaybe<ScheduledOperationWhereInput>;
+  scheduledIn_none?: InputMaybe<ScheduledOperationWhereInput>;
+  scheduledIn_some?: InputMaybe<ScheduledOperationWhereInput>;
+  tag?: InputMaybe<Scalars['String']>;
+  /** All values containing the given string. */
+  tag_contains?: InputMaybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  tag_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  tag_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** All values that are not equal to given value. */
+  tag_not?: InputMaybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  tag_not_contains?: InputMaybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  tag_not_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are not contained in given list. */
+  tag_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** All values not starting with the given string. */
+  tag_not_starts_with?: InputMaybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  tag_starts_with?: InputMaybe<Scalars['String']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  updatedAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  updatedAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  updatedAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  /** All values less than the given value. */
+  updatedAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  updatedAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  updatedAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  updatedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  updatedBy?: InputMaybe<UserWhereInput>;
+};
+
+export enum ProjectTagOrderByInput {
+  CreatedAtAsc = 'createdAt_ASC',
+  CreatedAtDesc = 'createdAt_DESC',
+  IdAsc = 'id_ASC',
+  IdDesc = 'id_DESC',
+  PublishedAtAsc = 'publishedAt_ASC',
+  PublishedAtDesc = 'publishedAt_DESC',
+  TagAsc = 'tag_ASC',
+  TagDesc = 'tag_DESC',
+  UpdatedAtAsc = 'updatedAt_ASC',
+  UpdatedAtDesc = 'updatedAt_DESC'
+}
+
+export type ProjectTagUpdateInput = {
+  backgroundColor?: InputMaybe<ColorInput>;
+  cld9atw9c0m7r01unecechmu0?: InputMaybe<ProjectUpdateManyInlineInput>;
+  tag?: InputMaybe<Scalars['String']>;
+};
+
+export type ProjectTagUpdateManyInlineInput = {
+  /** Connect multiple existing ProjectTag documents */
+  connect?: InputMaybe<Array<ProjectTagConnectInput>>;
+  /** Create and connect multiple ProjectTag documents */
+  create?: InputMaybe<Array<ProjectTagCreateInput>>;
+  /** Delete multiple ProjectTag documents */
+  delete?: InputMaybe<Array<ProjectTagWhereUniqueInput>>;
+  /** Disconnect multiple ProjectTag documents */
+  disconnect?: InputMaybe<Array<ProjectTagWhereUniqueInput>>;
+  /** Override currently-connected documents with multiple existing ProjectTag documents */
+  set?: InputMaybe<Array<ProjectTagWhereUniqueInput>>;
+  /** Update multiple ProjectTag documents */
+  update?: InputMaybe<Array<ProjectTagUpdateWithNestedWhereUniqueInput>>;
+  /** Upsert multiple ProjectTag documents */
+  upsert?: InputMaybe<Array<ProjectTagUpsertWithNestedWhereUniqueInput>>;
+};
+
+export type ProjectTagUpdateManyInput = {
+  backgroundColor?: InputMaybe<ColorInput>;
+  tag?: InputMaybe<Scalars['String']>;
+};
+
+export type ProjectTagUpdateManyWithNestedWhereInput = {
+  /** Update many input */
+  data: ProjectTagUpdateManyInput;
+  /** Document search */
+  where: ProjectTagWhereInput;
+};
+
+export type ProjectTagUpdateOneInlineInput = {
+  /** Connect existing ProjectTag document */
+  connect?: InputMaybe<ProjectTagWhereUniqueInput>;
+  /** Create and connect one ProjectTag document */
+  create?: InputMaybe<ProjectTagCreateInput>;
+  /** Delete currently connected ProjectTag document */
+  delete?: InputMaybe<Scalars['Boolean']>;
+  /** Disconnect currently connected ProjectTag document */
+  disconnect?: InputMaybe<Scalars['Boolean']>;
+  /** Update single ProjectTag document */
+  update?: InputMaybe<ProjectTagUpdateWithNestedWhereUniqueInput>;
+  /** Upsert single ProjectTag document */
+  upsert?: InputMaybe<ProjectTagUpsertWithNestedWhereUniqueInput>;
+};
+
+export type ProjectTagUpdateWithNestedWhereUniqueInput = {
+  /** Document to update */
+  data: ProjectTagUpdateInput;
+  /** Unique document search */
+  where: ProjectTagWhereUniqueInput;
+};
+
+export type ProjectTagUpsertInput = {
+  /** Create document if it didn't exist */
+  create: ProjectTagCreateInput;
+  /** Update document if it exists */
+  update: ProjectTagUpdateInput;
+};
+
+export type ProjectTagUpsertWithNestedWhereUniqueInput = {
+  /** Upsert data */
+  data: ProjectTagUpsertInput;
+  /** Unique document search */
+  where: ProjectTagWhereUniqueInput;
+};
+
+/** This contains a set of filters that can be used to compare values internally */
+export type ProjectTagWhereComparatorInput = {
+  /** This field can be used to request to check if the entry is outdated by internal comparison */
+  outdated_to?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** Identifies documents */
+export type ProjectTagWhereInput = {
+  /** Logical AND on all given filters. */
+  AND?: InputMaybe<Array<ProjectTagWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: InputMaybe<Array<ProjectTagWhereInput>>;
+  /** Logical OR on all given filters. */
+  OR?: InputMaybe<Array<ProjectTagWhereInput>>;
+  /** Contains search across all appropriate fields. */
+  _search?: InputMaybe<Scalars['String']>;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  createdAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  createdAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  createdAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  /** All values less than the given value. */
+  createdAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  createdAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  createdAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  createdAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  createdBy?: InputMaybe<UserWhereInput>;
+  documentInStages_every?: InputMaybe<ProjectTagWhereStageInput>;
+  documentInStages_none?: InputMaybe<ProjectTagWhereStageInput>;
+  documentInStages_some?: InputMaybe<ProjectTagWhereStageInput>;
+  id?: InputMaybe<Scalars['ID']>;
+  /** All values containing the given string. */
+  id_contains?: InputMaybe<Scalars['ID']>;
+  /** All values ending with the given string. */
+  id_ends_with?: InputMaybe<Scalars['ID']>;
+  /** All values that are contained in given list. */
+  id_in?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** All values that are not equal to given value. */
+  id_not?: InputMaybe<Scalars['ID']>;
+  /** All values not containing the given string. */
+  id_not_contains?: InputMaybe<Scalars['ID']>;
+  /** All values not ending with the given string */
+  id_not_ends_with?: InputMaybe<Scalars['ID']>;
+  /** All values that are not contained in given list. */
+  id_not_in?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** All values not starting with the given string. */
+  id_not_starts_with?: InputMaybe<Scalars['ID']>;
+  /** All values starting with the given string. */
+  id_starts_with?: InputMaybe<Scalars['ID']>;
+  publishedAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  publishedAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  publishedAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  publishedAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  /** All values less than the given value. */
+  publishedAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  publishedAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  publishedAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  publishedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  publishedBy?: InputMaybe<UserWhereInput>;
+  scheduledIn_every?: InputMaybe<ScheduledOperationWhereInput>;
+  scheduledIn_none?: InputMaybe<ScheduledOperationWhereInput>;
+  scheduledIn_some?: InputMaybe<ScheduledOperationWhereInput>;
+  tag?: InputMaybe<Scalars['String']>;
+  /** All values containing the given string. */
+  tag_contains?: InputMaybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  tag_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  tag_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** All values that are not equal to given value. */
+  tag_not?: InputMaybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  tag_not_contains?: InputMaybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  tag_not_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are not contained in given list. */
+  tag_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** All values not starting with the given string. */
+  tag_not_starts_with?: InputMaybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  tag_starts_with?: InputMaybe<Scalars['String']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  updatedAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  updatedAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  updatedAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  /** All values less than the given value. */
+  updatedAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  updatedAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  updatedAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  updatedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  updatedBy?: InputMaybe<UserWhereInput>;
+};
+
+/** The document in stages filter allows specifying a stage entry to cross compare the same document between different stages */
+export type ProjectTagWhereStageInput = {
+  /** Logical AND on all given filters. */
+  AND?: InputMaybe<Array<ProjectTagWhereStageInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: InputMaybe<Array<ProjectTagWhereStageInput>>;
+  /** Logical OR on all given filters. */
+  OR?: InputMaybe<Array<ProjectTagWhereStageInput>>;
+  /** This field contains fields which can be set as true or false to specify an internal comparison */
+  compareWithParent?: InputMaybe<ProjectTagWhereComparatorInput>;
+  /** Specify the stage to compare with */
+  stage?: InputMaybe<Stage>;
+};
+
+/** References ProjectTag record uniquely */
+export type ProjectTagWhereUniqueInput = {
+  id?: InputMaybe<Scalars['ID']>;
+};
+
 export type ProjectUpdateInput = {
   codeURL?: InputMaybe<Scalars['String']>;
   description?: InputMaybe<Scalars['String']>;
   imageUrl?: InputMaybe<AssetUpdateManyInlineInput>;
   projectURL?: InputMaybe<Scalars['String']>;
-  tags?: InputMaybe<Array<Scalars['String']>>;
+  tags?: InputMaybe<ProjectTagUpdateManyInlineInput>;
   title?: InputMaybe<Scalars['String']>;
 };
 
@@ -4097,7 +4699,6 @@ export type ProjectUpdateManyInput = {
   codeURL?: InputMaybe<Scalars['String']>;
   description?: InputMaybe<Scalars['String']>;
   projectURL?: InputMaybe<Scalars['String']>;
-  tags?: InputMaybe<Array<Scalars['String']>>;
   title?: InputMaybe<Scalars['String']>;
 };
 
@@ -4277,16 +4878,9 @@ export type ProjectWhereInput = {
   scheduledIn_every?: InputMaybe<ScheduledOperationWhereInput>;
   scheduledIn_none?: InputMaybe<ScheduledOperationWhereInput>;
   scheduledIn_some?: InputMaybe<ScheduledOperationWhereInput>;
-  /** Matches if the field array contains *all* items provided to the filter and order does match */
-  tags?: InputMaybe<Array<Scalars['String']>>;
-  /** Matches if the field array contains *all* items provided to the filter */
-  tags_contains_all?: InputMaybe<Array<Scalars['String']>>;
-  /** Matches if the field array does not contain any of the items provided to the filter */
-  tags_contains_none?: InputMaybe<Array<Scalars['String']>>;
-  /** Matches if the field array contains at least one item provided to the filter */
-  tags_contains_some?: InputMaybe<Array<Scalars['String']>>;
-  /** Matches if the field array does not contains *all* items provided to the filter or order does not match */
-  tags_not?: InputMaybe<Array<Scalars['String']>>;
+  tags_every?: InputMaybe<ProjectTagWhereInput>;
+  tags_none?: InputMaybe<ProjectTagWhereInput>;
+  tags_some?: InputMaybe<ProjectTagWhereInput>;
   title?: InputMaybe<Scalars['String']>;
   /** All values containing the given string. */
   title_contains?: InputMaybe<Scalars['String']>;
@@ -4388,6 +4982,14 @@ export type Query = {
   profilesConnection: ProfileConnection;
   /** Retrieve a single project */
   project?: Maybe<Project>;
+  /** Retrieve a single projectTag */
+  projectTag?: Maybe<ProjectTag>;
+  /** Retrieve document version */
+  projectTagVersion?: Maybe<DocumentVersion>;
+  /** Retrieve multiple projectTags */
+  projectTags: Array<ProjectTag>;
+  /** Retrieve multiple projectTags using the Relay connection interface */
+  projectTagsConnection: ProjectTagConnection;
   /** Retrieve document version */
   projectVersion?: Maybe<DocumentVersion>;
   /** Retrieve multiple projects */
@@ -4594,6 +5196,44 @@ export type QueryProjectArgs = {
   locales?: Array<Locale>;
   stage?: Stage;
   where: ProjectWhereUniqueInput;
+};
+
+
+export type QueryProjectTagArgs = {
+  locales?: Array<Locale>;
+  stage?: Stage;
+  where: ProjectTagWhereUniqueInput;
+};
+
+
+export type QueryProjectTagVersionArgs = {
+  where: VersionWhereInput;
+};
+
+
+export type QueryProjectTagsArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  locales?: Array<Locale>;
+  orderBy?: InputMaybe<ProjectTagOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  stage?: Stage;
+  where?: InputMaybe<ProjectTagWhereInput>;
+};
+
+
+export type QueryProjectTagsConnectionArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  locales?: Array<Locale>;
+  orderBy?: InputMaybe<ProjectTagOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  stage?: Stage;
+  where?: InputMaybe<ProjectTagWhereInput>;
 };
 
 
@@ -4914,7 +5554,7 @@ export type ScheduledOperationUpdatedByArgs = {
   locales?: InputMaybe<Array<Locale>>;
 };
 
-export type ScheduledOperationAffectedDocument = AcademicExperience | Asset | Contact | Profile | Project | Skill | WorkExperience;
+export type ScheduledOperationAffectedDocument = AcademicExperience | Asset | Contact | Profile | Project | ProjectTag | Skill | WorkExperience;
 
 export type ScheduledOperationConnectInput = {
   /** Allow to specify document position in list of connected documents, will default to appending at end of list */
@@ -7384,10 +8024,15 @@ export type GetProfileQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetProfileQuery = { __typename?: 'Query', profile?: { __typename?: 'Profile', id: string, description: string, name: string, headline: Array<string>, imageUrl: { __typename?: 'Asset', url: string } } | null };
 
+export type GetProjectsTagsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetProjectsTagsQuery = { __typename?: 'Query', projectTags: Array<{ __typename?: 'ProjectTag', id: string, tag: string }> };
+
 export type GetProjectsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetProjectsQuery = { __typename?: 'Query', projects: Array<{ __typename?: 'Project', id: string, title: string, description?: string | null, codeURL: string, projectURL?: string | null, tags: Array<string>, imageUrl: Array<{ __typename?: 'Asset', url: string }> }> };
+export type GetProjectsQuery = { __typename?: 'Query', projects: Array<{ __typename?: 'Project', id: string, title: string, description?: string | null, projectURL?: string | null, codeURL: string, imageUrl: Array<{ __typename?: 'Asset', url: string }>, tags: Array<{ __typename?: 'ProjectTag', id: string, tag: string, backgroundColor: { __typename?: 'Color', rgba: { __typename?: 'RGBA', r: any, g: any, b: any, a: any } } }> }> };
 
 export type GetSkillsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -7516,18 +8161,64 @@ export function useGetProfileLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions
 export type GetProfileQueryHookResult = ReturnType<typeof useGetProfileQuery>;
 export type GetProfileLazyQueryHookResult = ReturnType<typeof useGetProfileLazyQuery>;
 export type GetProfileQueryResult = Apollo.QueryResult<GetProfileQuery, GetProfileQueryVariables>;
+export const GetProjectsTagsDocument = gql`
+    query GetProjectsTags {
+  projectTags {
+    id
+    tag
+  }
+}
+    `;
+
+/**
+ * __useGetProjectsTagsQuery__
+ *
+ * To run a query within a React component, call `useGetProjectsTagsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetProjectsTagsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetProjectsTagsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetProjectsTagsQuery(baseOptions?: Apollo.QueryHookOptions<GetProjectsTagsQuery, GetProjectsTagsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetProjectsTagsQuery, GetProjectsTagsQueryVariables>(GetProjectsTagsDocument, options);
+      }
+export function useGetProjectsTagsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetProjectsTagsQuery, GetProjectsTagsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetProjectsTagsQuery, GetProjectsTagsQueryVariables>(GetProjectsTagsDocument, options);
+        }
+export type GetProjectsTagsQueryHookResult = ReturnType<typeof useGetProjectsTagsQuery>;
+export type GetProjectsTagsLazyQueryHookResult = ReturnType<typeof useGetProjectsTagsLazyQuery>;
+export type GetProjectsTagsQueryResult = Apollo.QueryResult<GetProjectsTagsQuery, GetProjectsTagsQueryVariables>;
 export const GetProjectsDocument = gql`
     query GetProjects {
   projects {
     id
     title
     description
-    codeURL
     projectURL
+    codeURL
     imageUrl {
       url
     }
-    tags
+    tags {
+      id
+      tag
+      backgroundColor {
+        rgba {
+          r
+          g
+          b
+          a
+        }
+      }
+    }
   }
 }
     `;

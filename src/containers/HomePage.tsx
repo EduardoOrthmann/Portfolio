@@ -15,15 +15,14 @@ function HomePage() {
   return (
     <section id="home" className={styles.home}>
       <motion.div className={styles.titles} whileInView={{ opacity: [0, 1] }}>
-        <motion.h1
-          whileInView={{ x: [-100, 0] }}
-          transition={{ duration: 0.5 }}
-        >
+        <motion.h1 whileInView={{ x: [-100, 0] }} transition={{ duration: 0.5 }}>
           Oi, eu sou {data.profile.name}
         </motion.h1>
         <h5>{data.profile.headline}</h5>
         <p>{data.profile.description}</p>
-        <Button icon={<PaperPlaneRight size={24} />}>Me Contate</Button>
+        <a href="#contact">
+          <Button icon={<PaperPlaneRight size={24} />}>Me Contate</Button>
+        </a>
       </motion.div>
       <motion.div
         className={styles.imageBg}
@@ -35,12 +34,7 @@ function HomePage() {
           duration: 4,
         }}
       >
-        <Image
-          src={data.profile.imageUrl.url}
-          width={400}
-          height={400}
-          alt="foto de perfil"
-        />
+        <Image src={data.profile.imageUrl.url} width={400} height={400} alt="foto de perfil" />
       </motion.div>
     </section>
   );

@@ -3,11 +3,22 @@ query GetProjects {
     id
     title
     description
-    codeURL
     projectURL
+    codeURL
     imageUrl {
       url
     }
-    tags
+    tags {
+      id
+      tag
+      backgroundColor {
+        rgba {
+          r
+          g
+          b
+          a
+        }
+      }
+    }
   }
 }
