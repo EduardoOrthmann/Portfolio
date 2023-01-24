@@ -33,8 +33,8 @@ function Projects() {
         Meus <span>Projetos</span>
       </h1>
       <ul className={styles.searchList}>
-        {allTags.map((name, i) => (
-          <li key={i}>
+        {allTags.map((name) => (
+          <li key={name}>
             <Button color="secondary" onClick={() => setSelectedFilter(name)} isSelected={selectedFilter === name}>
               {name}
             </Button>

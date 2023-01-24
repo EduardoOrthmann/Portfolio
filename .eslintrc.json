@@ -1,17 +1,13 @@
 {
   "plugins": ["@typescript-eslint"],
-  "extends": [
-    "next/core-web-vitals",
-    "airbnb-base",
-    "plugin:@typescript-eslint/recommended",
-    "prettier"
-  ],
+  "extends": ["next/core-web-vitals", "airbnb-base", "plugin:@typescript-eslint/recommended", "prettier"],
   "rules": {
     "prefer-const": "error",
     "@typescript-eslint/no-unused-vars": "error",
     "@typescript-eslint/no-explicit-any": "error",
     "import/extensions": 0,
     "react/display-name": 0,
-    "array-callback-return": 0
+    "array-callback-return": 0,
+    "no-console": 0
   }
 }
