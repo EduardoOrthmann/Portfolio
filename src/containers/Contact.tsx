@@ -1,10 +1,14 @@
 import { EnvelopeSimple, WhatsappLogo } from 'phosphor-react';
+import { useState } from 'react';
 import Button from '../components/Button';
 import { useGetContactQuery } from '../graphql/generated';
+import useFetch from '../hooks/useFetch';
 import styles from '../styles/Contact.module.scss';
 
 function Contact() {
   const { data } = useGetContactQuery();
+  const [emailData, setEmailData] = useState({});
+  const { isLoading, error } = useFetch('/api/contact', emailData);
 
   if (!data?.contact) {
     return <p>...</p>;
@@ -14,16 +18,7 @@ function Contact() {
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget);
-    const emailData = Object.fromEntries(formData);
-
-    await fetch('/api/contact', {
-      method: 'POST',
-      body: JSON.stringify(emailData),
-      headers: { 'Content-Type': 'application/json' },
-    })
-      .then((res) => res.json())
-      .then((logEmailData) => console.log(logEmailData))
-      .catch((error) => console.log(error));
+    setEmailData(Object.fromEntries(formData));
   };
 
   return (
@@ -56,20 +51,30 @@ function Contact() {
             </div>
           </div>
         </div>
-        <form className={styles.form} onSubmit={handleSubmit}>
+        {isLoading ? (
           <div>
-            <input type="text" name="subject" placeholder="Assunto" />
+            {isLoading && <div>Loading...</div>}
+            {error && <div>{error.message}</div>}
           </div>
-          <div>
-            <input type="email" name="from" placeholder="Seu email" />
-          </div>
-          <div>
-            <textarea name="text" placeholder="Sua mensagem"></textarea>
-          </div>
-          <Button color="purple" type="submit">
-            Enviar Mensagem
-          </Button>
-        </form>
+        ) : (
+          <form className={styles.form} onSubmit={handleSubmit}>
+            <div>
+              <input type="text" name="subject" id="subject" required autoComplete="off" />
+              <label htmlFor="subject" title="Assunto" data-title="Assunto"></label>
+            </div>
+            <div>
+              <input type="email" name="from" id="from" required autoComplete="off" />
+              <label htmlFor="from" title="Seu Email" data-title="Seu Email"></label>
+            </div>
+            <div>
+              <textarea name="text" id="text" required autoComplete="off"></textarea>
+              <label htmlFor="text" title="Sua Mensagem" data-title="Sua Mensagem"></label>
+            </div>
+            <Button color="purple" type="submit">
+              Enviar Mensagem
+            </Button>
+          </form>
+        )}
       </div>
     </section>
   );

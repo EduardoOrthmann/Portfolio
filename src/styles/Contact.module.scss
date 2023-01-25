@@ -75,16 +75,43 @@
     border-radius: 10px;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
-    border: 1px solid var(--secondary-color);
+
+    position: relative;
+
+    label::before {
+      content: attr(title);
+      position: absolute;
+      cursor: text;
+      top: 0;
+      left: 15px;
+      line-height: 40px;
+      font-size: 14px;
+      color: #777;
+      transition: 300ms all;
+    }
 
     input,
     textarea {
       width: 100%;
       padding: 0.95rem;
-      border: none;
       border-radius: 7px;
+      border: 1px solid #ccc;
       outline: none;
-      background-color: rgb(228, 228, 228, 0.3);
+
+      &:focus {
+        outline: 0;
+        border-color: var(--secondary-color);
+      }
+
+      &:valid + label::before {
+        @extend .labelBefore;
+        content: attr(data-title);
+      }
+
+      &:focus + label::before {
+        @extend .labelBefore;
+        color: var(--secondary-color);
+      }
     }
 
     textarea {
@@ -103,4 +130,13 @@
   @media screen and (max-width: 900px) {
     width: 100%;
   }
+}
+
+.labelBefore {
+  line-height: 20px;
+  font-size: 12px;
+  top: -10px;
+  background: #fff;
+  padding: 0 6px;
+  left: 9px;
 }
