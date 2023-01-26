@@ -1,3 +1,6 @@
+@use 'SuccessSvg.module' as success;
+@use 'ErrorSvg.module' as error;
+
 .container {
   display: flex;
   flex-direction: column;
@@ -28,6 +31,7 @@
 .content {
   width: 100%;
   max-width: 1000px;
+  min-height: 27.375rem;
   display: flex;
   justify-content: center;
   gap: 4rem;
@@ -121,10 +125,45 @@
   }
 
   button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 200px;
     padding: 1.2rem 1rem;
     font-size: 1em;
     font-weight: 500;
+    transition: all 0.5s ease-in-out;
+
+    &:has(.success) {
+      background-color: success.$checkmark-color;
+    }
+
+    &:has(.error) {
+      background-color: error.$checkmark-color;
+    }
+
+    &:disabled {
+      .buttonContent {
+        cursor: not-allowed;
+      }
+    }
+
+    .buttonContent {
+      display: grid;
+      place-items: center;
+      height: 20px;
+
+      & > * {
+        height: 100%;
+        width: 100%;
+      }
+    }
+
+    .buttonSvg {
+      bottom: 5px;
+      width: 30px;
+      height: 30px;
+    }
   }
 
   @media screen and (max-width: 900px) {
@@ -139,42 +178,4 @@
   background: #fff;
   padding: 0 6px;
   left: 9px;
-}
-
-$offset: 187;
-$duration: 1.4s;
-
-.spinner {
-  animation: rotator $duration linear infinite;
-}
-
-@keyframes rotator {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(270deg);
-  }
-}
-
-.path {
-  stroke-dasharray: $offset;
-  stroke-dashoffset: 0;
-  stroke: #4285f4;
-  transform-origin: center;
-  animation: dash $duration ease-in-out infinite;
-}
-
-@keyframes dash {
-  0% {
-    stroke-dashoffset: $offset;
-  }
-  50% {
-    stroke-dashoffset: $offset/4;
-    transform: rotate(135deg);
-  }
-  100% {
-    stroke-dashoffset: $offset;
-    transform: rotate(450deg);
-  }
 }

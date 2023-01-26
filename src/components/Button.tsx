@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import { CSSProperties } from 'react';
 import styles from '../styles/Button.module.scss';
 
 interface ButtonProps {
@@ -9,6 +10,7 @@ interface ButtonProps {
   type?: 'button' | 'submit';
   icon?: JSX.Element;
   isSelected?: boolean;
+  styles?: CSSProperties; 
 }
 
 function Button({
@@ -33,6 +35,7 @@ function Button({
       onClick={onClick}
       color={color}
       disabled={disabled}
+      style={styles}
     >
       {children}
       {icon}
