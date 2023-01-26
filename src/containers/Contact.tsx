@@ -1,5 +1,5 @@
-import { CheckCircle, EnvelopeSimple, WhatsappLogo } from 'phosphor-react';
-import { useState } from 'react';
+import { CheckCircle, EnvelopeSimple, WhatsappLogo, XCircle } from 'phosphor-react';
+import { useEffect, useState } from 'react';
 import Button from '../components/Button';
 import { useGetContactQuery } from '../graphql/generated';
 import useFetch from '../hooks/useFetch';
@@ -7,15 +7,38 @@ import styles from '../styles/Contact.module.scss';
 
 function Contact() {
   const { data } = useGetContactQuery();
-  const [emailData, setEmailData] = useState({});
-  const { isLoading, error, setIsFormSubmited } = useFetch('/api/contact', emailData);
+  const [formData, setFormData] = useState({});
+  const { fetchData } = useFetch();
+  const [status, setStatus] = useState<'form' | 'loading' | 'success' | 'error'>('form');
+
+  useEffect(() => {
+    if (status === 'success' || status === 'error') {
+      const timeoutId = setTimeout(() => {
+        setStatus('form');
+      }, 2000);
+      return () => clearTimeout(timeoutId);
+    }
+  }, [status]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setIsFormSubmited(true);
 
-    const formData = new FormData(e.currentTarget);
-    setEmailData(Object.fromEntries(formData));
+    setStatus('loading');
+    fetchData('/api/contact', {
+      method: 'POST',
+      body: JSON.stringify(formData),
+      headers: { 'Content-Type': 'application/json' },
+    })
+      .then(() => {
+        setStatus('success');
+      })
+      .catch(() => {
+        setStatus('error');
+      });
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   if (!data?.contact) {
@@ -26,30 +49,7 @@ function Contact() {
     <section id="contact" className={styles.container}>
       <h1 className={styles.headText}>Contato</h1>
       <div className={styles.content}>
-        {isLoading ? (
-          <div>
-            {isLoading && (
-              <svg
-                className={styles.spinner}
-                width="65px"
-                height="65px"
-                viewBox="0 0 66 66"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <circle
-                  className={styles.path}
-                  fill="none"
-                  stroke-width="6"
-                  stroke-linecap="round"
-                  cx="33"
-                  cy="33"
-                  r="30"
-                ></circle>
-              </svg>
-            )}
-            {error && <div>{error.message}</div>}
-          </div>
-        ) : (
+        {status === 'form' && (
           <>
             <div>
               <div className={styles.links}>
@@ -80,15 +80,15 @@ function Contact() {
 
             <form className={styles.form} onSubmit={handleSubmit}>
               <div>
-                <input type="text" name="subject" id="subject" required autoComplete="off" />
+                <input type="text" name="subject" id="subject" required autoComplete="off" onChange={handleChange} />
                 <label htmlFor="subject" title="Assunto" data-title="Assunto"></label>
               </div>
               <div>
-                <input type="email" name="from" id="from" required autoComplete="off" />
+                <input type="email" name="from" id="from" required autoComplete="off" onChange={handleChange} />
                 <label htmlFor="from" title="Seu Email" data-title="Seu Email"></label>
               </div>
               <div>
-                <textarea name="text" id="text" required autoComplete="off"></textarea>
+                <textarea name="text" id="text" required autoComplete="off" onChange={handleChange}></textarea>
                 <label htmlFor="text" title="Sua Mensagem" data-title="Sua Mensagem"></label>
               </div>
               <Button color="purple" type="submit">
@@ -97,6 +97,28 @@ function Contact() {
             </form>
           </>
         )}
+
+        {status === 'loading' && (
+          <svg
+            className={styles.spinner}
+            width="65px"
+            height="65px"
+            viewBox="0 0 66 66"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <circle
+              className={styles.path}
+              fill="none"
+              stroke-width="6"
+              stroke-linecap="round"
+              cx="33"
+              cy="33"
+              r="30"
+            ></circle>
+          </svg>
+        )}
+        {status === 'success' && <CheckCircle size={64} />}
+        {status === 'error' && <XCircle size={64} />}
       </div>
     </section>
   );

@@ -1,35 +1,31 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
-function useFetch(url: string, body: object) {
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<Error | null>(null);
-  const [isFormSubmited, setIsFormSubmited] = useState(false);
+interface FetchOptions {
+  method: 'GET' | 'POST' | 'PUT' | 'DELETE';
+  body: string;
+  headers: {
+    'Content-Type': string;
+  };
+}
 
-  useEffect(() => {
-    if (isFormSubmited) {
-      const fetchData = async () => {
-        setIsLoading(true);
+function useFetch() {
+  const [data, setData] = useState(null);
+  const [error, setError] = useState<null | Error>(null);
+  const [loading, setLoading] = useState(false);
 
-        try {
-          await fetch(url, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(body),
-          });
-
-          setIsFormSubmited(false);
-        } catch (err) {
-          setError(err as Error);
-        } finally {
-          setIsLoading(false);
-        }
-      };
-
-      fetchData();
+  const fetchData = async (url: string, options: FetchOptions) => {
+    setLoading(true);
+    try {
+      const response = await fetch(url, options);
+      const json = await response.json();
+      setData(json);
+    } catch (err) {
+      setError(err as Error);
     }
-  }, [body, url, isFormSubmited]);
+    setLoading(false);
+  };
 
-  return { isLoading, error, setIsFormSubmited };
+  return { data, error, loading, fetchData };
 }
 
 export default useFetch;
