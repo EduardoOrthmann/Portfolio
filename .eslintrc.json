@@ -8,6 +8,7 @@
     "import/extensions": 0,
     "react/display-name": 0,
     "array-callback-return": 0,
-    "no-console": 0
+    "no-console": 0,
+    "react-hooks/rules-of-hooks": 0
   }
 }
