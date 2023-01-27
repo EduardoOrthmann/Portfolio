@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import { motion } from 'framer-motion';
 import { CSSProperties } from 'react';
 import styles from '../styles/Button.module.scss';
 
@@ -10,7 +11,8 @@ interface ButtonProps {
   type?: 'button' | 'submit';
   icon?: JSX.Element;
   isSelected?: boolean;
-  styles?: CSSProperties; 
+  styles?: CSSProperties;
+  error?: boolean;
 }
 
 function Button({
@@ -21,15 +23,17 @@ function Button({
   disabled,
   type = 'button',
   isSelected = false,
+  error = false,
 }: ButtonProps) {
   return (
-    <button
+    <motion.button
       className={classNames(styles.btn, {
         [styles.primary]: color === 'primary',
         [styles.secondary]: color === 'secondary',
         [styles.purple]: color === 'purple',
         [styles.backgroundless]: color === 'backgroundless',
         [styles.selected]: isSelected === true,
+        [styles.error]: error === true,
       })}
       type={type}
       onClick={onClick}
@@ -39,7 +43,7 @@ function Button({
     >
       {children}
       {icon}
-    </button>
+    </motion.button>
   );
 }
 

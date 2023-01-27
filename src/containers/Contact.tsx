@@ -1,5 +1,6 @@
 import { EnvelopeSimple, WhatsappLogo } from 'phosphor-react';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import Button from '../components/Button';
 import ErrorSvg from '../components/ErrorSvg';
 import LoadingSvg from '../components/LoadingSvg';
@@ -8,43 +9,44 @@ import { useGetContactQuery } from '../graphql/generated';
 import useFetch from '../hooks/useFetch';
 import styles from '../styles/Contact.module.scss';
 
+interface FormData {
+  subject: string;
+  from: string;
+  text: string;
+}
+
 function Contact() {
   const { data } = useGetContactQuery();
-  const [formData, setFormData] = useState({});
   const { fetchData } = useFetch();
   const [status, setStatus] = useState<'button' | 'loading' | 'success' | 'error'>('button');
-  const formRef = useRef<HTMLFormElement>(null);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset
+  } = useForm<FormData>();
 
   useEffect(() => {
     if (status === 'success' || status === 'error') {
       const timeoutId = setTimeout(() => {
         setStatus('button');
       }, 2000);
-      formRef.current?.reset();
+      
+      reset();
 
       return () => clearTimeout(timeoutId);
     }
   }, [status]);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
+  const onSubmit: SubmitHandler<FormData> = async (formData) => {
     setStatus('loading');
     fetchData('/api/contact', {
       method: 'POST',
       body: JSON.stringify(formData),
       headers: { 'Content-Type': 'application/json' },
-    })
-      .then(() => {
-        setStatus('success');
-      })
-      .catch(() => {
-        setStatus('error');
-      });
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    }).then(() => {
+      setStatus('success');
+    });
   };
 
   if (!data?.contact) {
@@ -82,18 +84,38 @@ function Contact() {
           </div>
         </div>
 
-        <form className={styles.form} onSubmit={handleSubmit} ref={formRef}>
+        <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
           <div>
-            <input type="text" name="subject" id="subject" required autoComplete="off" onChange={handleChange} />
+            <input
+              type="text"
+              placeholder="placeholder"
+              id="subject"
+              autoComplete="off"
+              {...register('subject', { required: true })}
+            />
             <label htmlFor="subject" title="Assunto" data-title="Assunto"></label>
+            {errors.subject && <span>Este campo é obrigatório</span>}
           </div>
           <div>
-            <input type="email" name="from" id="from" required autoComplete="off" onChange={handleChange} />
+            <input
+              type="text"
+              placeholder="placeholder"
+              id="from"
+              autoComplete="off"
+              {...register('from', { required: true, pattern: /^\S+@\S+$/i })}
+            />
             <label htmlFor="from" title="Seu Email" data-title="Seu Email"></label>
+            {errors.from && <span>Este campo é obrigatório</span>}
           </div>
           <div>
-            <textarea name="text" id="text" required autoComplete="off" onChange={handleChange}></textarea>
+            <textarea
+              id="text"
+              placeholder="placeholder"
+              autoComplete="off"
+              {...register('text', { required: true })}
+            ></textarea>
             <label htmlFor="text" title="Sua Mensagem" data-title="Sua Mensagem"></label>
+            {errors.text && <span>Este campo é obrigatório</span>}
           </div>
           <Button color="purple" type="submit" disabled={status !== 'button'}>
             <div className={styles.buttonContent}>

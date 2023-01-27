@@ -52,6 +52,10 @@
     background: rgb(49, 59, 172, 0.8);
     color: rgb(255, 255, 255, 0.8);
   }
+
+  &.error {
+    animation: errorBlink 0.5s linear;
+  }
 }
 
 .backgroundless {
@@ -66,5 +70,17 @@
   &:disabled {
     background: #d4d4d4;
     color: #f5f5f5;
+  }
+}
+
+@keyframes errorBlink {
+  0%, 20%, 40%, 60%, 80% {
+    transform: translateX(-3%);
+  }
+  0%, 10%, 30%, 50%, 70% {
+    transform: translateX(3%);
+  }
+  100% {
+    transform: translateX(0);
   }
 }

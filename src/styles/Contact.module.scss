@@ -94,6 +94,15 @@
       transition: 300ms all;
     }
 
+    .labelBefore {
+      line-height: 20px;
+      font-size: 12px;
+      top: -10px;
+      background: #fff;
+      padding: 0 6px;
+      left: 9px;
+    }
+
     input,
     textarea {
       width: 100%;
@@ -107,7 +116,11 @@
         border-color: var(--secondary-color);
       }
 
-      &:valid + label::before {
+      &::placeholder {
+        color: transparent;
+      }
+
+      &:not(:placeholder-shown) + label::before{
         @extend .labelBefore;
         content: attr(data-title);
       }
@@ -171,11 +184,4 @@
   }
 }
 
-.labelBefore {
-  line-height: 20px;
-  font-size: 12px;
-  top: -10px;
-  background: #fff;
-  padding: 0 6px;
-  left: 9px;
-}
+
