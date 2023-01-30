@@ -79,8 +79,18 @@
     border-radius: 10px;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
-
     position: relative;
+
+    &:has(span.inputError) {
+      input,
+      textarea {
+        border-color: red;
+        
+        &:focus + label::before {
+          color: red;
+        }
+      }
+    }
 
     label::before {
       content: attr(title);
@@ -120,7 +130,7 @@
         color: transparent;
       }
 
-      &:not(:placeholder-shown) + label::before{
+      &:not(:placeholder-shown) + label::before {
         @extend .labelBefore;
         content: attr(data-title);
       }
@@ -184,4 +194,7 @@
   }
 }
 
-
+.inputError {
+  font-size: 0.8em;
+  color: red;
+}

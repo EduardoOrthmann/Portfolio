@@ -23,7 +23,7 @@ function Contact() {
     register,
     handleSubmit,
     formState: { errors },
-    reset
+    reset,
   } = useForm<FormData>();
 
   useEffect(() => {
@@ -31,7 +31,7 @@ function Contact() {
       const timeoutId = setTimeout(() => {
         setStatus('button');
       }, 2000);
-      
+
       reset();
 
       return () => clearTimeout(timeoutId);
@@ -94,7 +94,7 @@ function Contact() {
               {...register('subject', { required: true })}
             />
             <label htmlFor="subject" title="Assunto" data-title="Assunto"></label>
-            {errors.subject && <span>Este campo é obrigatório</span>}
+            {errors.subject && <span className={styles.inputError}>Este campo é obrigatório</span>}
           </div>
           <div>
             <input
@@ -105,7 +105,8 @@ function Contact() {
               {...register('from', { required: true, pattern: /^\S+@\S+$/i })}
             />
             <label htmlFor="from" title="Seu Email" data-title="Seu Email"></label>
-            {errors.from && <span>Este campo é obrigatório</span>}
+            {errors.from?.type === 'required' && <span className={styles.inputError}>Este campo é obrigatório</span>}
+            {errors.from?.type === 'pattern' && <span className={styles.inputError}>Insira um Email válido</span>}
           </div>
           <div>
             <textarea
@@ -115,9 +116,9 @@ function Contact() {
               {...register('text', { required: true })}
             ></textarea>
             <label htmlFor="text" title="Sua Mensagem" data-title="Sua Mensagem"></label>
-            {errors.text && <span>Este campo é obrigatório</span>}
+            {errors.text && <span className={styles.inputError}>Este campo é obrigatório</span>}
           </div>
-          <Button color="purple" type="submit" disabled={status !== 'button'}>
+          <Button color="purple" type="submit" disabled={status !== 'button'} error={Object.keys(errors).length > 0}>
             <div className={styles.buttonContent}>
               {status === 'button' && 'Enviar Mensagem'}
               {status === 'loading' && <LoadingSvg />}
