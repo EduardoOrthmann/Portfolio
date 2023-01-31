@@ -35,7 +35,7 @@ function Projects() {
       <ul className={styles.searchList}>
         {allTags.map((name) => (
           <li key={name}>
-            <Button color="secondary" onClick={() => setSelectedFilter(name)} isSelected={selectedFilter === name}>
+            <Button color="white" onClick={() => setSelectedFilter(name)} isSelected={selectedFilter === name}>
               {name}
             </Button>
           </li>

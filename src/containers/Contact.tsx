@@ -118,7 +118,7 @@ function Contact() {
             <label htmlFor="text" title="Sua Mensagem" data-title="Sua Mensagem"></label>
             {errors.text && <span className={styles.inputError}>Este campo é obrigatório</span>}
           </div>
-          <Button color="purple" type="submit" disabled={status !== 'button'} error={Object.keys(errors).length > 0}>
+          <Button color="blue" type="submit" disabled={status !== 'button'} error={Object.keys(errors).length > 0}>
             <div className={styles.buttonContent}>
               {status === 'button' && 'Enviar Mensagem'}
               {status === 'loading' && <LoadingSvg />}
