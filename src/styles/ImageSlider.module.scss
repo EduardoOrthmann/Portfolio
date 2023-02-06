@@ -1,0 +1,25 @@
+.container {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  & > svg {
+    &:first-child {
+      right: 87%;
+    }
+
+    &:last-child {
+      left: 87%;
+    }
+
+    z-index: 1;
+    position: absolute;
+    border-radius: 50%;
+    background-color: #fff;
+    padding: 0.3rem;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
