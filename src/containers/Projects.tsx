@@ -1,10 +1,10 @@
+/* eslint-disable no-nested-ternary */
 import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
 import { Code, Eye } from 'phosphor-react';
 import { useState } from 'react';
 import Button from '../components/Button';
 import Card from '../components/Card';
-import ImageSlider from '../components/ImageSlider';
 import { useGetProjectsQuery, useGetProjectsTagsQuery } from '../graphql/generated';
 import styles from '../styles/Projects.module.scss';
 
@@ -12,6 +12,7 @@ function Projects() {
   const { data: projectData } = useGetProjectsQuery();
   const { data: tagsData } = useGetProjectsTagsQuery();
   const [selectedFilter, setSelectedFilter] = useState<string>('Todos');
+  const [showMore, setShowMore] = useState<boolean>(false);
 
   if (!projectData?.projects || !tagsData?.projectTags) {
     return <p>...</p>;
@@ -27,6 +28,9 @@ function Projects() {
 
     return project;
   });
+
+  const visibleProjects = showMore ? filteredProjects : filteredProjects.slice(0, 6);
+  const showLoadMoreButton = filteredProjects.length > 6;
 
   return (
     <section id="projects" className={styles.container}>
@@ -44,7 +48,7 @@ function Projects() {
       </ul>
       <div className={styles.projects}>
         <AnimatePresence>
-          {filteredProjects.map((project) => (
+          {visibleProjects.map((project) => (
             <motion.div
               key={project.id}
               layout
@@ -55,45 +59,31 @@ function Projects() {
             >
               <Card>
                 <Card.Image>
-                  <ImageSlider>
-                    {project.imageUrl.map((img) => (
-                      <div className={styles.image} key={img.url}>
-                        <motion.div
-                          className={styles.imageOverlay}
-                          whileHover={{ opacity: [0, 1] }}
-                          transition={{
-                            duration: 0.25,
-                            ease: 'easeInOut',
-                            staggerChildren: 0.5,
-                          }}
-                        >
-                          <a
-                            href={project.codeURL}
-                            target="_blank"
-                            rel="noreferrer"
-                            title="vizualizar código do projeto"
-                          >
-                            <motion.div whileHover={{ scale: [1, 0.9] }} transition={{ duration: 0.25 }}>
-                              <Code size={32} />
-                            </motion.div>
-                          </a>
-                          {project.projectURL && (
-                            <a
-                              href={project.projectURL}
-                              target="_blank"
-                              rel="noreferrer"
-                              title="vizualizar projeto online"
-                            >
-                              <motion.div whileHover={{ scale: [1, 0.9] }} transition={{ duration: 0.25 }}>
-                                <Eye size={32} />
-                              </motion.div>
-                            </a>
-                          )}
+                  <div className={styles.image} key={project.imageUrl.url}>
+                    <motion.div
+                      className={styles.imageOverlay}
+                      whileHover={{ opacity: [0, 1] }}
+                      transition={{
+                        duration: 0.25,
+                        ease: 'easeInOut',
+                        staggerChildren: 0.5,
+                      }}
+                    >
+                      <a href={project.codeURL} target="_blank" rel="noreferrer" title="vizualizar código do projeto">
+                        <motion.div whileHover={{ scale: [1, 0.9] }} transition={{ duration: 0.25 }}>
+                          <Code size={32} />
                         </motion.div>
-                        <Image src={img.url} width={550} height={300} alt="foto do projeto" />
-                      </div>
-                    ))}
-                  </ImageSlider>
+                      </a>
+                      {project.projectURL && (
+                        <a href={project.projectURL} target="_blank" rel="noreferrer" title="vizualizar projeto online">
+                          <motion.div whileHover={{ scale: [1, 0.9] }} transition={{ duration: 0.25 }}>
+                            <Eye size={32} />
+                          </motion.div>
+                        </a>
+                      )}
+                    </motion.div>
+                    <Image src={project.imageUrl.url} width={550} height={300} alt="foto do projeto" />
+                  </div>
                 </Card.Image>
                 <Card.Content>
                   <div className={styles.content}>
@@ -129,6 +119,19 @@ function Projects() {
           ))}
         </AnimatePresence>
       </div>
+      {showLoadMoreButton && !showMore ? (
+        <span className={styles.loadMoreBtn}>
+          <Button color="blueHover" onClick={() => setShowMore(true)}>
+            Carregar Mais
+          </Button>
+        </span>
+      ) : showLoadMoreButton ? (
+        <span className={styles.loadMoreBtn}>
+          <Button color="blueHover" onClick={() => setShowMore(false)}>
+            Recolher
+          </Button>
+        </span>
+      ) : null}
     </section>
   );
 }

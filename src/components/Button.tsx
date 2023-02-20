@@ -6,7 +6,7 @@ import styles from '../styles/Button.module.scss';
 interface ButtonProps {
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   children?: React.ReactNode;
-  color?: 'gradient' | 'white' | 'blue' | 'backgroundless';
+  color?: 'gradient' | 'white' | 'blue' | 'backgroundless' | 'blueHover';
   disabled?: boolean;
   type?: 'button' | 'submit';
   icon?: JSX.Element;
@@ -45,6 +45,7 @@ function Button({
         [styles.gradient]: color === 'gradient',
         [styles.white]: color === 'white',
         [styles.blue]: color === 'blue',
+        [styles.blueHover]: color === 'blueHover',
         [styles.backgroundless]: color === 'backgroundless',
         [styles.selected]: isSelected === true,
         [styles.error]: shake === true,

@@ -27,6 +27,7 @@
 
 .searchList {
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   gap: 1rem;
 
@@ -45,10 +46,14 @@
   gap: 3rem;
 
   & > div {
-    width: 21rem;
+    width: 22.6rem;
 
     @media screen and (min-width: 2000px) {
       width: 29.375rem;
+    }
+
+    @media screen and (max-width: 380px) {
+      width: 20rem;
     }
   }
 
@@ -124,4 +129,9 @@
       }
     }
   }
+}
+
+.loadMoreBtn {
+  width: 10rem;
+  height: 3rem;
 }

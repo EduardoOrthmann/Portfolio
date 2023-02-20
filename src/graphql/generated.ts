@@ -3909,7 +3909,7 @@ export type Project = Node & {
   history: Array<Version>;
   /** The unique identifier */
   id: Scalars['ID'];
-  imageUrl: Array<Asset>;
+  imageUrl: Asset;
   projectURL?: Maybe<Scalars['String']>;
   /** The time the document was published. Null on documents in draft stage. */
   publishedAt?: Maybe<Scalars['DateTime']>;
@@ -3948,15 +3948,8 @@ export type ProjectHistoryArgs = {
 
 
 export type ProjectImageUrlArgs = {
-  after?: InputMaybe<Scalars['String']>;
-  before?: InputMaybe<Scalars['String']>;
-  first?: InputMaybe<Scalars['Int']>;
   forceParentLocale?: InputMaybe<Scalars['Boolean']>;
-  last?: InputMaybe<Scalars['Int']>;
   locales?: InputMaybe<Array<Locale>>;
-  orderBy?: InputMaybe<AssetOrderByInput>;
-  skip?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<AssetWhereInput>;
 };
 
 
@@ -4017,7 +4010,7 @@ export type ProjectCreateInput = {
   codeURL: Scalars['String'];
   createdAt?: InputMaybe<Scalars['DateTime']>;
   description?: InputMaybe<Scalars['String']>;
-  imageUrl: AssetCreateManyInlineInput;
+  imageUrl: AssetCreateOneInlineInput;
   projectURL?: InputMaybe<Scalars['String']>;
   tags?: InputMaybe<ProjectTagCreateManyInlineInput>;
   title: Scalars['String'];
@@ -4133,9 +4126,7 @@ export type ProjectManyWhereInput = {
   id_not_starts_with?: InputMaybe<Scalars['ID']>;
   /** All values starting with the given string. */
   id_starts_with?: InputMaybe<Scalars['ID']>;
-  imageUrl_every?: InputMaybe<AssetWhereInput>;
-  imageUrl_none?: InputMaybe<AssetWhereInput>;
-  imageUrl_some?: InputMaybe<AssetWhereInput>;
+  imageUrl?: InputMaybe<AssetWhereInput>;
   projectURL?: InputMaybe<Scalars['String']>;
   /** All values containing the given string. */
   projectURL_contains?: InputMaybe<Scalars['String']>;
@@ -4672,7 +4663,7 @@ export type ProjectTagWhereUniqueInput = {
 export type ProjectUpdateInput = {
   codeURL?: InputMaybe<Scalars['String']>;
   description?: InputMaybe<Scalars['String']>;
-  imageUrl?: InputMaybe<AssetUpdateManyInlineInput>;
+  imageUrl?: InputMaybe<AssetUpdateOneInlineInput>;
   projectURL?: InputMaybe<Scalars['String']>;
   tags?: InputMaybe<ProjectTagUpdateManyInlineInput>;
   title?: InputMaybe<Scalars['String']>;
@@ -4837,9 +4828,7 @@ export type ProjectWhereInput = {
   id_not_starts_with?: InputMaybe<Scalars['ID']>;
   /** All values starting with the given string. */
   id_starts_with?: InputMaybe<Scalars['ID']>;
-  imageUrl_every?: InputMaybe<AssetWhereInput>;
-  imageUrl_none?: InputMaybe<AssetWhereInput>;
-  imageUrl_some?: InputMaybe<AssetWhereInput>;
+  imageUrl?: InputMaybe<AssetWhereInput>;
   projectURL?: InputMaybe<Scalars['String']>;
   /** All values containing the given string. */
   projectURL_contains?: InputMaybe<Scalars['String']>;
@@ -5691,6 +5680,8 @@ export type ScheduledOperationManyWhereInput = {
   /** All values that are not contained in given list. */
   publishedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
   publishedBy?: InputMaybe<UserWhereInput>;
+  /** All values containing the given json path. */
+  rawPayload_json_path_exists?: InputMaybe<Scalars['String']>;
   release?: InputMaybe<ScheduledReleaseWhereInput>;
   status?: InputMaybe<ScheduledOperationStatus>;
   /** All values that are contained in given list. */
@@ -5858,6 +5849,8 @@ export type ScheduledOperationWhereInput = {
   /** All values that are not contained in given list. */
   publishedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
   publishedBy?: InputMaybe<UserWhereInput>;
+  /** All values containing the given json path. */
+  rawPayload_json_path_exists?: InputMaybe<Scalars['String']>;
   release?: InputMaybe<ScheduledReleaseWhereInput>;
   status?: InputMaybe<ScheduledOperationStatus>;
   /** All values that are contained in given list. */
@@ -7944,6 +7937,7 @@ export enum _FilterKind {
   Gt = 'gt',
   Gte = 'gte',
   In = 'in',
+  JsonPathExists = 'json_path_exists',
   Lt = 'lt',
   Lte = 'lte',
   NotContains = 'not_contains',
@@ -8032,7 +8026,7 @@ export type GetProjectsTagsQuery = { __typename?: 'Query', projectTags: Array<{ 
 export type GetProjectsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetProjectsQuery = { __typename?: 'Query', projects: Array<{ __typename?: 'Project', id: string, title: string, description?: string | null, projectURL?: string | null, codeURL: string, imageUrl: Array<{ __typename?: 'Asset', url: string }>, tags: Array<{ __typename?: 'ProjectTag', id: string, tag: string, backgroundColor: { __typename?: 'Color', rgba: { __typename?: 'RGBA', r: any, g: any, b: any, a: any } } }> }> };
+export type GetProjectsQuery = { __typename?: 'Query', projects: Array<{ __typename?: 'Project', id: string, title: string, description?: string | null, projectURL?: string | null, codeURL: string, imageUrl: { __typename?: 'Asset', url: string }, tags: Array<{ __typename?: 'ProjectTag', id: string, tag: string, backgroundColor: { __typename?: 'Color', rgba: { __typename?: 'RGBA', r: any, g: any, b: any, a: any } } }> }> };
 
 export type GetSkillsQueryVariables = Exact<{ [key: string]: never; }>;
 
