@@ -13,25 +13,6 @@
   }
 }
 
-.headText {
-  font-size: 2.75rem;
-  font-weight: 800;
-  color: var(--black-color);
-  text-transform: capitalize;
-
-  span {
-    color: var(--secondary-color);
-  }
-
-  @media screen and (min-width: 2000px) {
-    font-size: 4rem;
-  }
-
-  @media screen and (max-width: 450px) {
-    font-size: 2rem;
-  }
-}
-
 .subtext {
   color: var(--gray-color);
   font-size: 1.1em;

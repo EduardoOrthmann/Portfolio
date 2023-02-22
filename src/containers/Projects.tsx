@@ -5,6 +5,7 @@ import { Code, Eye } from 'phosphor-react';
 import { useState } from 'react';
 import Button from '../components/Button';
 import Card from '../components/Card';
+import HeadTitle from '../components/HeadTitle';
 import { useGetProjectsQuery, useGetProjectsTagsQuery } from '../graphql/generated';
 import styles from '../styles/Projects.module.scss';
 
@@ -34,9 +35,9 @@ function Projects() {
 
   return (
     <section id="projects" className={styles.container}>
-      <h1 className={styles.headText}>
+      <HeadTitle>
         Meus <span>Projetos</span>
-      </h1>
+      </HeadTitle>
       <ul className={styles.searchList}>
         {allTags.map((name) => (
           <li key={name}>
@@ -46,7 +47,7 @@ function Projects() {
           </li>
         ))}
       </ul>
-      <div className={styles.projects}>
+      <motion.div className={styles.projects} whileInView={{ opacity: [0, 1] }}>
         <AnimatePresence>
           {visibleProjects.map((project) => (
             <motion.div
@@ -118,7 +119,7 @@ function Projects() {
             </motion.div>
           ))}
         </AnimatePresence>
-      </div>
+      </motion.div>
       {showLoadMoreButton && !showMore ? (
         <span className={styles.loadMoreBtn}>
           <Button color="blueHover" onClick={() => setShowMore(true)}>

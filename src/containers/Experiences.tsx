@@ -5,6 +5,7 @@ import Button from '../components/Button';
 import { useGetWorkExperiencesQuery, useGetAcademicExperiencesQuery } from '../graphql/generated';
 import styles from '../styles/Experiences.module.scss';
 import 'react-vertical-timeline-component/style.min.css';
+import HeadTitle from '../components/HeadTitle';
 
 function Experiences() {
   const buttonNames = [
@@ -29,7 +30,7 @@ function Experiences() {
   return (
     <section id="experiences" className={styles.container}>
       <header>
-        <h1 className={styles.headText}>Experiências</h1>
+        <HeadTitle>Experiências</HeadTitle>
         <span className={styles.subtext}>Minha jornada pessoal</span>
       </header>
       <div className={styles.experiencesContainer}>

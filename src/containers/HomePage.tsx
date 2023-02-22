@@ -21,7 +21,7 @@ function HomePage() {
         <h5>{data.profile.headline}</h5>
         <p>{data.profile.description}</p>
         <a href="#contact">
-          <Button icon={<PaperPlaneRight size={24} />}>Me Contate</Button>
+          <Button icon={<PaperPlaneRight size={24} /> }>Me Contate</Button>
         </a>
       </motion.div>
       <motion.div

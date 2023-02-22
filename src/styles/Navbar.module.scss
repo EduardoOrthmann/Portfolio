@@ -52,6 +52,20 @@
         color: var(--secondary-color);
       }
     }
+
+    &.active {
+      a {
+        color: var(--secondary-color);
+
+        &::before {
+          color: var(--secondary-color);
+        }
+      }
+
+      span {
+        background: var(--secondary-color);
+      }
+    }
   }
 
   @media screen and (max-width: 900px) {

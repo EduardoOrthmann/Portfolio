@@ -1,8 +1,10 @@
 import { EnvelopeSimple, WhatsappLogo } from 'phosphor-react';
+import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import Button from '../components/Button';
 import ErrorSvg from '../components/ErrorSvg';
+import HeadTitle from '../components/HeadTitle';
 import LoadingSvg from '../components/LoadingSvg';
 import SuccessSvg from '../components/SuccessSvg';
 import { useGetContactQuery } from '../graphql/generated';
@@ -55,8 +57,8 @@ function Contact() {
 
   return (
     <section id="contact" className={styles.container}>
-      <h1 className={styles.headText}>Contato</h1>
-      <div className={styles.content}>
+      <HeadTitle>Contato</HeadTitle>
+      <motion.div className={styles.content} whileInView={{ x: [-100, 0] }} transition={{ duration: 0.5 }}>
         <div>
           <div className={styles.links}>
             <div>
@@ -135,7 +137,7 @@ function Contact() {
             </div>
           </Button>
         </form>
-      </div>
+      </motion.div>
     </section>
   );
 }
