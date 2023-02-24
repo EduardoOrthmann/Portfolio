@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import { PaperPlaneRight } from 'phosphor-react';
 import { motion } from 'framer-motion';
 import Button from '../components/Button';
@@ -31,7 +30,6 @@ function HomePage() {
           duration: 4,
         }}
       >
-        <Image src={data?.profile?.imageUrl.url} width={400} height={400} alt="foto de perfil" />
       </motion.div>
     </section>
   );
