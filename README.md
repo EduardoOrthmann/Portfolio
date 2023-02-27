@@ -1,9 +1,9 @@
 ## Getting Started
 
-First, run **npm install** in your bash to install all the dependencies
+First, run **npm install** in your bash to install all the dependencies.
 
 
-Second, you want to create an account on GraphCMS and clone my project with all the schema ready to use, did that just fill the schema with your information and follow the next steps
+Second, you want to create an account on GraphCMS and clone my project with all the schema ready to use, [![Clone project](https://graphcms.com/button)](https://app.graphcms.com/clone/88017ea0d0ac4d189ab6f091e6e379a8?name=Portfolio) did that just fill the schema with your information and follow the next steps.
 
 
 Third, create a new file in the global directory called *.env.local*, you need to put 4 variables in this file so do as the example bellow:
