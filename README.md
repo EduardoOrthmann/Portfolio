@@ -39,9 +39,8 @@ nodemailer follow these steps:
 
 - Open your gmail
 - Click in manage your google account
-- Go to security
-- Go down to app passwords
-- Select other and give a name of your choice
-- Click in generate and copy and paste the password in the .env.local constants
+- Search for app passwords
+- In app passwords select *other* and give a name of your choice
+- Click in generate and copy and paste the password in the *.env.local* constants
 
 
